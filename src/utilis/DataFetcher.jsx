@@ -13,7 +13,6 @@ const DataFetcher = (url, token) => {
       })
       .then((res) => setData(res.data))
       .catch((error) => {
-        // Handle errors here
         console.error("Axios error:", error);
       });
   }, [url, token]);

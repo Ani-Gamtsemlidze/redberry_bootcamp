@@ -1,11 +1,10 @@
 import DataFetcher from "../../utilis/DataFetcher";
 import styles from "./Categories.module.css";
 
-function Categories() {
-  const { data } = DataFetcher(
-    "https://api.blog.redberryinternship.ge/api/categories"
-  );
+const BASE_URL = "https://api.blog.redberryinternship.ge/api/categories";
 
+function Categories() {
+  const { data } = DataFetcher(BASE_URL);
   return (
     <ul className={styles.category_box}>
       {data.data?.map((category) => (
@@ -19,7 +18,6 @@ function Categories() {
           <p style={{ color: category.text_color }}>{category.title} </p>
         </li>
       ))}
-      {console.log(data.data)}
     </ul>
   );
 }

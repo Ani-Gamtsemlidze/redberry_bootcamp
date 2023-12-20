@@ -1,17 +1,18 @@
 .category_box {
-  width: 684px;
+  max-width: 684px;
   display: flex;
-  /* justify-content: center; */
   align-items: center;
   overflow-x: scroll;
   margin: 0 auto;
+  padding: 5px;
 }
 .category_list {
+  white-space: nowrap;
   font-size: 12px;
   list-style: none;
-  min-width: 176px;
   padding: 8px 16px;
-  margin: 24px;
   border-radius: 30px;
   text-align: center;
+  margin: 24px 24px 24px 0;
+  cursor: pointer;
 }

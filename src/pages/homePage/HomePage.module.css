@@ -1,0 +1,16 @@
+.banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 64px 80px;
+}
+
+.banner img {
+  width: 624px;
+  height: 200px;
+  object-fit: contain;
+}
+.title {
+  font-size: 64px;
+  font-weight: 700;
+}

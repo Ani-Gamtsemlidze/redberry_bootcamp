@@ -1,0 +1,5 @@
+.blog_box {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 64px 76px 0;
+}
