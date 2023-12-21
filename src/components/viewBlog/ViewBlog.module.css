@@ -1,0 +1,38 @@
+.blog_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 720px;
+}
+.blog_image {
+  width: 720px;
+  height: 328px;
+  margin-top: 40px;
+}
+.blog_container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.author {
+  font-size: 16px;
+  color: #1a1a1f;
+  font-weight: 700;
+  margin: 40px 0 8px 0;
+}
+.date_email {
+  display: flex;
+  align-items: center;
+}
+.email {
+  margin-left: 12px;
+}
+.title {
+  margin: 24px 0;
+}
+.description {
+  margin: 40px 0;
+}
