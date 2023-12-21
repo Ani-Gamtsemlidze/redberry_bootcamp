@@ -1,6 +1,9 @@
 .blog_box {
   display: flex;
   flex-wrap: wrap;
-
-  /* margin: 64px 76px 0; */
+  justify-content: space-between;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 20px;
+  width: 100%;
 }

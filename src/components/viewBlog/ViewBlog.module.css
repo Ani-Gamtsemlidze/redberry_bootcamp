@@ -4,6 +4,7 @@
   justify-content: center;
   margin: 0 auto;
   max-width: 720px;
+  position: relative;
 }
 .blog_image {
   width: 720px;
@@ -27,12 +28,28 @@
   display: flex;
   align-items: center;
 }
+.date_email span {
+  color: #85858d;
+  font-size: 12px;
+}
 .email {
   margin-left: 12px;
 }
 .title {
   margin: 24px 0;
 }
+.categories {
+  display: flex;
+}
+
 .description {
   margin: 40px 0;
+  font-size: 16px;
+  line-height: 28px;
+}
+
+.back_arrow {
+  position: absolute;
+  cursor: pointer;
+  left: -30%;
 }

@@ -1,0 +1,9 @@
+.category_list {
+  white-space: nowrap;
+  list-style: none;
+  font-size: 12px;
+  padding: 6px 10px;
+  font-weight: 500;
+  border-radius: 30px;
+  margin: 16px 16px 10px 0;
+}

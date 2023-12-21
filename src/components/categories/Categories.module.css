@@ -2,9 +2,8 @@
   max-width: 684px;
   display: flex;
   align-items: center;
-  overflow-x: scroll;
+  flex-wrap: wrap;
   margin: 0 auto;
-  padding: 5px;
 }
 .category_list {
   white-space: nowrap;
@@ -13,6 +12,6 @@
   padding: 8px 16px;
   border-radius: 30px;
   text-align: center;
-  margin: 24px 24px 24px 0;
+  margin: 0 24px 24px 0;
   cursor: pointer;
 }

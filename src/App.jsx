@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import BlogContext from "./context/BlogContext";
 import BlogDetail from "./pages/blogDetail/BlogDetail";
 import HomePage from "./pages/homePage/HomePage";
 
@@ -13,7 +14,11 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <BlogContext>
+      <RouterProvider router={router} />
+    </BlogContext>
+  );
 }
 
 export default App;

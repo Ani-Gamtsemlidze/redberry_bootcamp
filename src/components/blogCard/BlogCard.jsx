@@ -1,6 +1,7 @@
 import styles from "./BlogCard.module.css";
 import ViewMoreArrow from "../../../public/images/arrow.svg";
 import { Link } from "react-router-dom";
+import BlogCategories from "../blogCategories/BlogCategories";
 
 function BlogCard({ blog }) {
   return (
@@ -16,19 +17,11 @@ function BlogCard({ blog }) {
         <div className={styles.blog_title}>
           <h2>{blog.title}</h2>
         </div>
-        <div className={styles.blog_category}>
+        <ul className={styles.blog_category}>
           {blog.categories?.map((category, index) => (
-            <p
-              key={index}
-              style={{
-                color: category.text_color,
-                backgroundColor: category.background_color,
-              }}
-            >
-              {category.title}
-            </p>
+            <BlogCategories key={index} category={category} />
           ))}
-        </div>
+        </ul>
         <div className={styles.description}>
           <p>{blog.description.slice(0, 86)}...</p>
         </div>
