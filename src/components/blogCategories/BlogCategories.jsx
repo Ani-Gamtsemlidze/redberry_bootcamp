@@ -1,15 +1,19 @@
+import { useBlogs } from "../../context/BlogContextProvider";
 import styles from "./BlogCategories.module.css";
 
-function BlogCategories({ category }) {
+function BlogCategories({ blogCategories, blogCardId }) {
   return (
     <li
+      onClick={() => console.log(blogCardId)}
       className={styles.category_list}
       style={{
-        backgroundColor: `${category.background_color}`,
+        backgroundColor: `${blogCategories.background_color}`,
       }}
-      key={category.id}
+      key={blogCategories.id}
     >
-      <p style={{ color: category.text_color }}>{category.title} </p>
+      <p style={{ color: blogCategories.text_color }}>
+        {blogCategories.title}{" "}
+      </p>
     </li>
   );
 }

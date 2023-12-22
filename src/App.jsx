@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import BlogContext from "./context/BlogContext";
+import { BlogContextProvider } from "./context/BlogContextProvider";
 import BlogDetail from "./pages/blogDetail/BlogDetail";
 import HomePage from "./pages/homePage/HomePage";
 
@@ -15,9 +15,9 @@ const router = createBrowserRouter([
 ]);
 function App() {
   return (
-    <BlogContext>
+    <BlogContextProvider>
       <RouterProvider router={router} />
-    </BlogContext>
+    </BlogContextProvider>
   );
 }
 

@@ -25,7 +25,7 @@ function ViewBlog({ blogData }) {
         </div>
         <ul className={styles.categories}>
           {blogData.categories?.map((category, index) => (
-            <BlogCategories key={index} category={category} />
+            <BlogCategories key={index} blogCategories={category} />
           ))}
         </ul>
         <div className={styles.description}>
