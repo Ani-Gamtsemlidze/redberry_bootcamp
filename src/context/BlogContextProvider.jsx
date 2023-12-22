@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import DataFetcher from "../utilis/DataFetcher";
 
 export const BlogThemeContext = createContext();
@@ -18,9 +19,10 @@ function BlogContextProvider(props) {
     }
   }, [data]);
 
+  // const params = useParams();
+  // console.log(params.id);
+
   const filterHandler = (categoryId) => {
-    // Log to check the categoryId
-    // categoryId = [1, 5];
     console.log(categoryId);
     const filteredBlogs = data.data?.filter((blog) => {
       return categoryId.some((categoryIdItem) => {
@@ -29,8 +31,8 @@ function BlogContextProvider(props) {
         );
       });
     });
-    console.log(filteredBlogs);
     // Update the state with the filtered list
+    console.log(filteredBlogs);
     setBlogsList(filteredBlogs);
   };
 
