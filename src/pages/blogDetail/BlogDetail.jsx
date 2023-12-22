@@ -6,14 +6,14 @@ import styles from "./BlogDetail.module.css";
 
 function BlogDetail() {
   const params = useParams();
-  const { data } = DataFetcher(
+  const { blogData } = DataFetcher(
     `https://api.blog.redberryinternship.ge/api/blogs/${params.id}`,
     "5e4977d25fb8a029227f395a8d29b694059c94c67d1253b1930c154111b277c1"
   );
   return (
     <div className={styles.blogDetail_page}>
       <Header />
-      <ViewBlog blogData={data} />
+      <ViewBlog blogDetails={blogData} />
     </div>
   );
 }
