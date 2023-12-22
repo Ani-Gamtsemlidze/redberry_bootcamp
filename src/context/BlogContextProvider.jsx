@@ -24,16 +24,19 @@ function BlogContextProvider(props) {
 
   const filterHandler = (categoryId) => {
     console.log(categoryId);
-    const filteredBlogs = data.data?.filter((blog) => {
-      return categoryId.some((categoryIdItem) => {
-        return blog.categories.some(
-          (blogCategory) => blogCategory.id === categoryIdItem
-        );
+    if (categoryId.length < 1) {
+      setBlogsList(data.data);
+    } else {
+      const filteredBlogs = data.data?.filter((blog) => {
+        return categoryId.some((categoryIdItem) => {
+          return blog.categories.some(
+            (blogCategory) => blogCategory.id === categoryIdItem
+          );
+        });
       });
-    });
+      setBlogsList(filteredBlogs);
+    }
     // Update the state with the filtered list
-    console.log(filteredBlogs);
-    setBlogsList(filteredBlogs);
   };
 
   return (
