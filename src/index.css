@@ -14,3 +14,7 @@
   box-sizing: border-box;
   font-family: "FiraGo";
 }
+
+.active_category {
+  border: 1px solid black;
+}
