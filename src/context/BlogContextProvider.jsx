@@ -20,13 +20,16 @@ function BlogContextProvider(props) {
 
   const filterHandler = (categoryId) => {
     // Log to check the categoryId
-    const filteredBlogs = blogsList.filter((blog) => {
+    // categoryId = [1, 5];
+    console.log(categoryId);
+    const filteredBlogs = data.data?.filter((blog) => {
       return categoryId.some((categoryIdItem) => {
         return blog.categories.some(
           (blogCategory) => blogCategory.id === categoryIdItem
         );
       });
     });
+    console.log(filteredBlogs);
     // Update the state with the filtered list
     setBlogsList(filteredBlogs);
   };

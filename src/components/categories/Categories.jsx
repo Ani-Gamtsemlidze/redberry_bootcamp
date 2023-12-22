@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useBlogs } from "../../context/BlogContextProvider";
 import DataFetcher from "../../utilis/DataFetcher";
 import styles from "./Categories.module.css";
@@ -5,15 +6,17 @@ import styles from "./Categories.module.css";
 const BASE_URL = "https://api.blog.redberryinternship.ge/api/categories";
 
 function Categories() {
+  const [categoryId, setCategoryId] = useState([]);
   const { blogsList, filterHandler } = useBlogs();
 
   const { data } = DataFetcher(BASE_URL);
-  let categoryId = [];
-
+  // if(categoryId.length)
   function handlerId(id) {
-    categoryId.push(id);
-    filterHandler(categoryId);
+    setCategoryId((prevId) => [...prevId, id]);
   }
+  useEffect(() => {
+    filterHandler(categoryId);
+  }, [categoryId]);
 
   return (
     <ul className={styles.category_box}>
