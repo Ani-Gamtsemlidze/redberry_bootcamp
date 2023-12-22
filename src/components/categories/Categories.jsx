@@ -5,16 +5,14 @@ import styles from "./Categories.module.css";
 const BASE_URL = "https://api.blog.redberryinternship.ge/api/categories";
 
 function Categories() {
-  const { blogsList, ids } = useBlogs();
+  const { blogsList, filterHandler } = useBlogs();
 
   const { data } = DataFetcher(BASE_URL);
+  let categoryId = [];
 
   function handlerId(id) {
-    if (id === ids.map((id) => id)) {
-      console.log("done");
-    }
-    console.log(id, "categories");
-    // console.log(blogsList, "blogCategories");
+    categoryId.push(id);
+    filterHandler(categoryId);
   }
 
   return (
