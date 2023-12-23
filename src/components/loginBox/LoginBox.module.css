@@ -73,6 +73,7 @@
   margin: 52px 0 40px;
   text-align: center;
   cursor: pointer;
+  outline: none;
 }
 
 .error_info {

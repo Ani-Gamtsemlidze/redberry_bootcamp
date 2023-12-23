@@ -20,7 +20,9 @@ function LoginContextProvider(props) {
     }
   }, []);
 
-  const handleRequest = async () => {
+  const handleRequest = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     try {
       const response = await axios.post(BASE_URL, {
         email: userEmail,

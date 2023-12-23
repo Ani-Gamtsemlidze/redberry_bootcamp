@@ -34,10 +34,16 @@ function LoginBox() {
             <div className={styles.title}>
               <h2>შესვლა</h2>
             </div>
-            <form className={styles.form} id="login">
+            <form
+              onSubmit={(e) => handleRequest(e)}
+              className={styles.form}
+              id="loginForm"
+            >
               <label htmlFor="login">ელ-ფოსტა</label>
               <div className={styles.input_btn}>
                 <input
+                  id="login"
+                  name="login"
                   onChange={(e) => setUserEmail(e.target.value)}
                   value={userEmail}
                   type="text"
@@ -49,9 +55,9 @@ function LoginBox() {
                     <span>ელ-ფოსტა არ მოიძებნა</span>
                   </div>
                 ) : null}
-                <div onClick={handleRequest} className={styles.btn}>
+                <button type="submit" className={styles.btn}>
                   შესვლა
-                </div>
+                </button>
               </div>
             </form>
           </>

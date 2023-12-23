@@ -40,7 +40,7 @@ function BlogContextProvider(props) {
   };
 
   function handleLogin() {
-    setIsPopUp(!isPopUp);
+    setIsPopUp(true);
   }
 
   function handleClose() {
