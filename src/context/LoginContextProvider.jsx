@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import useDataFetcherPost from "../utilis/useDataFetchPost";
 
 export const LoginThemeContext = createContext();
@@ -16,7 +16,7 @@ function LoginContextProvider(props) {
     if (responseData) {
       console.log("Email exists:", responseData);
       setIsEmailExist(true);
-    } else if (!responseData) {
+    } else if (error) {
       setEmailNotFound(true);
       console.log("Error occurred:", error);
     }

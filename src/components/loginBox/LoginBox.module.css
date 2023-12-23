@@ -72,6 +72,7 @@
   border: none;
   margin: 52px 0 40px;
   text-align: center;
+  cursor: pointer;
 }
 
 .error_info {

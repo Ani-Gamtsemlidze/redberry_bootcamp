@@ -12,7 +12,6 @@ const useDataFetcherPost = (initialUrl, initialData) => {
         const response = await axios.post(initialUrl, {
           email: initialData,
         });
-        console.log(response);
         setResponseData(response);
         setIsLoading(false);
       } catch (err) {
