@@ -6,7 +6,7 @@ import styles from "./Header.module.css";
 
 const Header = () => {
   const { handleLogin } = useBlogs();
-  const { userEmail } = useLogin();
+  const { active } = useLogin();
 
   return (
     <div className={styles.header}>
@@ -14,7 +14,7 @@ const Header = () => {
         <img src={logo} />
       </div>
       <div className={styles.login}>
-        {userEmail ? (
+        {active ? (
           <button onClick={handleLogin}>შესვლა</button>
         ) : (
           <button>დაამატე ბლოგი</button>

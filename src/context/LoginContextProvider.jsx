@@ -1,24 +1,39 @@
+import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import useDataFetcherPost from "../utilis/useDataFetchPost";
 
 export const LoginThemeContext = createContext();
 function LoginContextProvider(props) {
   const [userEmail, setUserEmail] = useState("");
+  const [active, setActive] = useState(false);
+  // const [error, setError] = useState(false);
+  const [responseData, setResponseData] = useState();
   const [isEmailExist, setIsEmailExist] = useState(false);
   const [emailNotFound, setEmailNotFound] = useState(false);
 
-  const { responseData, isLoading, error } = useDataFetcherPost(
-    "https://api.blog.redberryinternship.ge/api/login",
-    userEmail
-  );
+  const BASE_URL = "https://api.blog.redberryinternship.ge/api/login";
 
-  const handleRequest = () => {
-    if (responseData) {
-      console.log("Email exists:", responseData);
-      setIsEmailExist(true);
-    } else if (error) {
+  console.log(localStorage.getItem("mail"));
+
+  useEffect(() => {
+    if (localStorage.getItem("mail") === userEmail) {
+      setActive(true);
+    }
+  }, []);
+
+  const handleRequest = async () => {
+    try {
+      const response = await axios.post(BASE_URL, {
+        email: userEmail,
+      });
+      setResponseData(response);
+      if (response) {
+        console.log("Email exists:", response);
+        setIsEmailExist(true);
+        localStorage.setItem("mail", userEmail);
+      }
+    } catch (err) {
+      console.error("Axios error:", err);
       setEmailNotFound(true);
-      console.log("Error occurred:", error);
     }
   };
 
@@ -30,6 +45,7 @@ function LoginContextProvider(props) {
         setUserEmail,
         emailNotFound,
         userEmail,
+        active,
       }}
     >
       {props.children}
