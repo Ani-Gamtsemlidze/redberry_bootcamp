@@ -1,11 +1,14 @@
 import styles from "./LoginBox.module.css";
 import close from "../../../public/images/close.svg";
+import error_img from "../../../public/images/error.svg";
 import { useBlogs } from "../../context/BlogContextProvider";
 import { useState } from "react";
 import useDataFetcherPost from "../../utilis/useDataFetchPost";
 
 function LoginBox() {
   const [email, setEmail] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
+  const [emailNotFound, setEmailNotFound] = useState(false);
   const { handleClose } = useBlogs();
 
   const { responseData, isLoading, error } = useDataFetcherPost(
@@ -16,7 +19,9 @@ function LoginBox() {
   const handleRequest = () => {
     if (responseData) {
       console.log("Email exists:", responseData);
+      setIsLogin(true);
     } else if (!responseData) {
+      setEmailNotFound(true);
       console.log("Error occurred:", error);
     }
   };
@@ -24,26 +29,38 @@ function LoginBox() {
   return (
     <div className={styles.login_container}>
       <div className={styles.login_box}>
-        <div onClick={handleClose} className={styles.close}>
-          <img src={close} alt="Close" />
-        </div>
-        <div className={styles.title}>
-          <h2>შესვლა</h2>
-        </div>
-        <form className={styles.form} id="login">
-          <label htmlFor="login">ელ-ფოსტა</label>
-          <div className={styles.input_btn}>
-            <input
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              type="text"
-              placeholder="Example@redberry.ge"
-            />
-            <div onClick={handleRequest} className={styles.login_btn}>
-              შესვლა
+        {isLogin ? (
+          <div> ok </div>
+        ) : (
+          <>
+            <div onClick={handleClose} className={styles.close}>
+              <img src={close} alt="Close" />
             </div>
-          </div>
-        </form>
+            <div className={styles.title}>
+              <h2>შესვლა</h2>
+            </div>
+            <form className={styles.form} id="login">
+              <label htmlFor="login">ელ-ფოსტა</label>
+              <div className={styles.input_btn}>
+                <input
+                  onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  type="text"
+                  placeholder="Example@redberry.ge"
+                />
+                {emailNotFound ? (
+                  <div className={styles.error_info}>
+                    <img src={error_img} />
+                    <span>ელ-ფოსტა არ მოიძებნა</span>
+                  </div>
+                ) : null}
+                <div onClick={handleRequest} className={styles.login_btn}>
+                  შესვლა
+                </div>
+              </div>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );
