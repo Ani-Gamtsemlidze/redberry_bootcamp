@@ -3,6 +3,7 @@ import Header from "../../components/header/Header";
 import banner from "../../../public/images/Blog.png";
 import styles from "./HomePage.module.css";
 import BlogsList from "../../components/blogsList/BlogsList";
+import LoginBox from "../../components/loginBox/LoginBox";
 
 function Banner() {
   return (
@@ -19,6 +20,7 @@ function HomePage() {
       <Banner />
       <Categories />
       <BlogsList />
+      <LoginBox />
     </>
   );
 }
