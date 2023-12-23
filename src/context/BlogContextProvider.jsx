@@ -7,6 +7,7 @@ function BlogContextProvider(props) {
   const [blogsList, setBlogsList] = useState([]);
   const [isPopUp, setIsPopUp] = useState(false);
   const [urlParams, seturlParams] = useState([]);
+  const [isLogin, setIsLogin] = useState(false);
 
   const BASE_URL = "https://api.blog.redberryinternship.ge/api/blogs";
   const token =
@@ -60,6 +61,8 @@ function BlogContextProvider(props) {
         handleLogin,
         handleClose,
         handleSuccessLogin,
+        isLogin,
+        setIsLogin,
       }}
     >
       {props.children}

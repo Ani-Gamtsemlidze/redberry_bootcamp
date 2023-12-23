@@ -8,9 +8,8 @@ import useDataFetcherPost from "../../utilis/useDataFetchPost";
 
 function LoginBox() {
   const [email, setEmail] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
   const [emailNotFound, setEmailNotFound] = useState(false);
-  const { handleClose, handleSuccessLogin } = useBlogs();
+  const { handleClose, handleSuccessLogin, isLogin, setIsLogin } = useBlogs();
 
   const { responseData, isLoading, error } = useDataFetcherPost(
     "https://api.blog.redberryinternship.ge/api/login",
