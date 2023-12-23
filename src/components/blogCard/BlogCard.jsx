@@ -3,7 +3,6 @@ import ViewMoreArrow from "../../../public/images/arrow.svg";
 
 import { Link } from "react-router-dom";
 import BlogCategories from "../blogCategories/BlogCategories";
-import { useBlogs } from "../../context/BlogContextProvider";
 
 function BlogCard({ blogCard }) {
   return (
