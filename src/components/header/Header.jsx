@@ -15,9 +15,9 @@ const Header = () => {
       </div>
       <div className={styles.login}>
         {active ? (
-          <button onClick={handleLogin}>შესვლა</button>
-        ) : (
           <button>დაამატე ბლოგი</button>
+        ) : (
+          <button onClick={handleLogin}>შესვლა</button>
         )}
       </div>
     </div>

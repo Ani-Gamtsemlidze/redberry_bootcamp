@@ -12,10 +12,10 @@ function LoginContextProvider(props) {
 
   const BASE_URL = "https://api.blog.redberryinternship.ge/api/login";
 
-  console.log(localStorage.getItem("mail"));
-
   useEffect(() => {
-    if (localStorage.getItem("mail") === userEmail) {
+    const storedEmail = localStorage.getItem("mail");
+    if (storedEmail) {
+      // setUserEmail(storedEmail);
       setActive(true);
     }
   }, []);
