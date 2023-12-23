@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import logo from "../../../public/images/redberry_logo.png";
-import LoginBox from "../loginBox/LoginBox";
+import { useBlogs } from "../../context/BlogContextProvider";
 import styles from "./Header.module.css";
 
 const Header = () => {
-  const [isPopUp, setIsPopUp] = useState(false);
-  function handleLogin() {
-    setIsPopUp(true);
-  }
+  const { handleLogin } = useBlogs();
+
   return (
     <div className={styles.header}>
       <div className={styles.logo}>
@@ -16,7 +14,6 @@ const Header = () => {
       <div onClick={handleLogin} className={styles.login}>
         <button>შესვლა</button>
       </div>
-      {isPopUp ? <LoginBox /> : null}
     </div>
   );
 };
