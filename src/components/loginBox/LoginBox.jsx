@@ -1,6 +1,7 @@
 import styles from "./LoginBox.module.css";
 import close from "../../../public/images/close.svg";
 import error_img from "../../../public/images/error.svg";
+import success from "../../../public/images/success.svg";
 import { useBlogs } from "../../context/BlogContextProvider";
 import { useState } from "react";
 import useDataFetcherPost from "../../utilis/useDataFetchPost";
@@ -9,7 +10,7 @@ function LoginBox() {
   const [email, setEmail] = useState("");
   const [isLogin, setIsLogin] = useState(false);
   const [emailNotFound, setEmailNotFound] = useState(false);
-  const { handleClose } = useBlogs();
+  const { handleClose, handleSuccessLogin } = useBlogs();
 
   const { responseData, isLoading, error } = useDataFetcherPost(
     "https://api.blog.redberryinternship.ge/api/login",
@@ -30,7 +31,13 @@ function LoginBox() {
     <div className={styles.login_container}>
       <div className={styles.login_box}>
         {isLogin ? (
-          <div> ok </div>
+          <div className={styles.success_info}>
+            <img src={success} />
+            <p>წარმატებული ავტორიზაცია</p>
+            <button onClick={handleSuccessLogin} className={styles.btn}>
+              კარგი
+            </button>
+          </div>
         ) : (
           <>
             <div onClick={handleClose} className={styles.close}>
@@ -54,7 +61,7 @@ function LoginBox() {
                     <span>ელ-ფოსტა არ მოიძებნა</span>
                   </div>
                 ) : null}
-                <div onClick={handleRequest} className={styles.login_btn}>
+                <div onClick={handleRequest} className={styles.btn}>
                   შესვლა
                 </div>
               </div>

@@ -47,9 +47,20 @@ function BlogContextProvider(props) {
     setIsPopUp(!isPopUp);
   }
 
+  function handleSuccessLogin() {
+    setIsPopUp(!isPopUp);
+  }
+
   return (
     <BlogThemeContext.Provider
-      value={{ blogsList, filterHandler, isPopUp, handleLogin, handleClose }}
+      value={{
+        blogsList,
+        filterHandler,
+        isPopUp,
+        handleLogin,
+        handleClose,
+        handleSuccessLogin,
+      }}
     >
       {props.children}
     </BlogThemeContext.Provider>
