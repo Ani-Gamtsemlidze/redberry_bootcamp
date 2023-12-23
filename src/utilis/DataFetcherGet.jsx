@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const DataFetcher = (url, token) => {
+const DataFetcherGet = (url, token) => {
   const [blogData, setBlogData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,4 +27,5 @@ const DataFetcher = (url, token) => {
   }, [url, token]);
   return { blogData, isLoading, error };
 };
-export default DataFetcher;
+
+export default DataFetcherGet;
