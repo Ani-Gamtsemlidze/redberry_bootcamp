@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
+import InnerBlog from "../../components/blogs/innerBlog/InnerBlog";
 import Header from "../../components/header/Header";
-import ViewBlog from "../../components/viewBlog/ViewBlog";
 import DataFetcherGet from "../../utilis/DataFetcherGet";
 import styles from "./BlogDetail.module.css";
 
@@ -13,7 +13,7 @@ function BlogDetail() {
   return (
     <div className={styles.blogDetail_page}>
       <Header />
-      <ViewBlog blogDetails={blogData} />
+      <InnerBlog blogDetails={blogData} />
     </div>
   );
 }

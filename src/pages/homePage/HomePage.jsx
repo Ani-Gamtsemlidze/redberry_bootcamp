@@ -2,9 +2,9 @@ import Categories from "../../components/categories/Categories";
 import Header from "../../components/header/Header";
 import banner from "../../../public/images/Blog.png";
 import styles from "./HomePage.module.css";
-import BlogsList from "../../components/blogsList/BlogsList";
 import LoginBox from "../../components/loginBox/LoginBox";
-import { useBlogs } from "../../context/BlogContextProvider";
+import BlogsList from "../../components/blogs/blogsList/BlogsList";
+import { useLogin } from "../../context/LoginContextProvider";
 
 function Banner() {
   return (
@@ -15,14 +15,12 @@ function Banner() {
   );
 }
 function HomePage() {
-  const { isPopUp } = useBlogs();
+  const { isPopUp } = useLogin();
   return (
     <div style={{ backgroundColor: "#E4E3EB", position: "relative" }}>
       <Header />
       {isPopUp ? <LoginBox /> : null}
-      {/* <div style={{ position: "relative" }}> */}
       <Banner />
-      {/* </div> */}
       <Categories />
       <BlogsList />
     </div>

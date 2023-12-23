@@ -5,7 +5,6 @@ export const BlogThemeContext = createContext();
 
 function BlogContextProvider(props) {
   const [blogsList, setBlogsList] = useState([]);
-  const [isPopUp, setIsPopUp] = useState(false);
   const [urlParams, seturlParams] = useState([]);
 
   const BASE_URL = "https://api.blog.redberryinternship.ge/api/blogs";
@@ -39,27 +38,11 @@ function BlogContextProvider(props) {
     seturlParams(categoryId);
   };
 
-  function handleLogin() {
-    setIsPopUp(true);
-  }
-
-  function handleClose() {
-    setIsPopUp(!isPopUp);
-  }
-
-  function handleSuccessLogin() {
-    setIsPopUp(!isPopUp);
-  }
-
   return (
     <BlogThemeContext.Provider
       value={{
         blogsList,
         filterHandler,
-        isPopUp,
-        handleLogin,
-        handleClose,
-        handleSuccessLogin,
       }}
     >
       {props.children}

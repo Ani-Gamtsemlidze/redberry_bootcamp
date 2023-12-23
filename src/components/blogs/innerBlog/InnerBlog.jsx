@@ -1,9 +1,9 @@
-import styles from "./ViewBlog.module.css";
-import backArrow from "../../../public/images/back_arrow.svg";
+import styles from "./InnerBlog.module.css";
+import backArrow from "../../../../public/images/back_arrow.svg";
 import { Link } from "react-router-dom";
 import BlogCategories from "../blogCategories/BlogCategories";
 
-function ViewBlog({ blogDetails }) {
+function InnerBlog({ blogDetails }) {
   return (
     <>
       <div className={styles.blog_container}>
@@ -36,4 +36,4 @@ function ViewBlog({ blogDetails }) {
   );
 }
 
-export default ViewBlog;
+export default InnerBlog;

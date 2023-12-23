@@ -5,6 +5,7 @@ export const LoginThemeContext = createContext();
 function LoginContextProvider(props) {
   const [userEmail, setUserEmail] = useState("");
   const [active, setActive] = useState(false);
+  const [isPopUp, setIsPopUp] = useState(false);
   // const [error, setError] = useState(false);
   const [responseData, setResponseData] = useState();
   const [isEmailExist, setIsEmailExist] = useState(false);
@@ -41,6 +42,20 @@ function LoginContextProvider(props) {
     }
   };
 
+  function handleLogin() {
+    setIsPopUp(true);
+  }
+
+  function handleClose() {
+    setIsPopUp(!isPopUp);
+    setUserEmail("");
+    setEmailNotFound(false);
+  }
+
+  function handleSuccessLogin() {
+    setIsPopUp(!isPopUp);
+  }
+
   return (
     <LoginThemeContext.Provider
       value={{
@@ -50,6 +65,10 @@ function LoginContextProvider(props) {
         emailNotFound,
         userEmail,
         active,
+        isPopUp,
+        handleLogin,
+        handleClose,
+        handleSuccessLogin,
       }}
     >
       {props.children}

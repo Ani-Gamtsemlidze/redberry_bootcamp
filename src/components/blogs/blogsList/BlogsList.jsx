@@ -1,5 +1,5 @@
 import styles from "./BlogsList.module.css";
-import { useBlogs } from "../../context/BlogContextProvider";
+import { useBlogs } from "../../../context/BlogContextProvider";
 import BlogCard from "../blogCard/BlogCard";
 
 function BlogsList() {

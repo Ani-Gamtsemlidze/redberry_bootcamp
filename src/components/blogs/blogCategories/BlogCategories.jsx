@@ -1,4 +1,3 @@
-import { useBlogs } from "../../context/BlogContextProvider";
 import styles from "./BlogCategories.module.css";
 
 function BlogCategories({ blogCategories }) {

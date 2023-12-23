@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import logo from "../../../public/images/redberry_logo.png";
-import { useBlogs } from "../../context/BlogContextProvider";
 import { useLogin } from "../../context/LoginContextProvider";
 import styles from "./Header.module.css";
 
 const Header = () => {
-  const { handleLogin } = useBlogs();
-  const { active } = useLogin();
+  const { active, handleLogin } = useLogin();
 
   return (
     <div className={styles.header}>

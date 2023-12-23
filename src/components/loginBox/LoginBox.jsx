@@ -2,12 +2,12 @@ import styles from "./LoginBox.module.css";
 import close from "../../../public/images/close.svg";
 import error_img from "../../../public/images/error.svg";
 import success from "../../../public/images/success.svg";
-import { useBlogs } from "../../context/BlogContextProvider";
 import { useLogin } from "../../context/LoginContextProvider";
 
 function LoginBox() {
-  const { handleClose, handleSuccessLogin } = useBlogs();
   const {
+    handleClose,
+    handleSuccessLogin,
     handleRequest,
     isEmailExist,
     setUserEmail,
