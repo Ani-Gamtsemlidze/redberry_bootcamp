@@ -29,6 +29,8 @@ function LoginContextProvider(props) {
       if (response) {
         console.log("Email exists:", response);
         setIsEmailExist(true);
+        setActive(true);
+
         localStorage.setItem("mail", userEmail);
       }
     } catch (err) {
