@@ -1,5 +1,5 @@
 import styles from "./BlogCard.module.css";
-import ViewMoreArrow from "../../../public/images/arrow.svg";
+// import ViewMoreArrow from "../../../public/images/arrow.svg";
 
 import { Link } from "react-router-dom";
 import BlogCategories from "../blogCategories/BlogCategories";
@@ -28,7 +28,7 @@ function BlogCard({ blogCard }) {
         </div>
         <Link to={`/blog/${blogCard.id}`} className={styles.view_more}>
           <span>სრულად ნახვა</span>
-          <img src={ViewMoreArrow} alt="see more" />
+          {/* <img src={ViewMoreArrow} alt="see more" /> */}
         </Link>
       </div>
     </>

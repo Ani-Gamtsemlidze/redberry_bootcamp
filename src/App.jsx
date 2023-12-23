@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { BlogContextProvider } from "./context/BlogContextProvider";
+import { LoginContextProvider } from "./context/LoginContextProvider";
 import BlogDetail from "./pages/blogDetail/BlogDetail";
 import HomePage from "./pages/homePage/HomePage";
 
@@ -16,7 +17,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <BlogContextProvider>
-      <RouterProvider router={router} />
+      <LoginContextProvider>
+        <RouterProvider router={router} />
+      </LoginContextProvider>
     </BlogContextProvider>
   );
 }
