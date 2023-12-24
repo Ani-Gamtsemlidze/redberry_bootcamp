@@ -1,3 +1,5 @@
-import { BlogUpload } from "./BlogUpload.1";
+function BlogUpload() {
+  return <div>uploaded</div>;
+}
 
 export default BlogUpload;
