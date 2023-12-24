@@ -1,34 +1,37 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useBlogs } from "../../context/BlogContextProvider";
 import BlogCard from "../blogs/blogCard/BlogCard";
 
 function Slider({ categoryId }) {
   const [sliderData, setSliderData] = useState([]);
   const { blogsList } = useBlogs();
-  //   console.log(categoryId);
+  const params = useParams();
 
   useEffect(() => {
-    // console.log(blogsList);
-    const filteredBlogs = blogsList?.filter((blog) => {
-      return categoryId.some((categoryIdItem) => {
-        console.log(categoryIdItem.id);
-        return blog.categories.some(
-          (blogCategory) => blogCategory.id === categoryIdItem.id
-        );
-      });
-    });
-    setSliderData(filteredBlogs);
-  }, [blogsList]);
+    const filterData = blogsList?.find((blog) => blog.id === Number(params.id));
 
-  console.log(sliderData);
+    if (filterData) {
+      const filteredBlogs = blogsList?.filter((blog) => {
+        return categoryId.some((categoryIdItem) => {
+          return blog.categories?.some(
+            (blogCategory) => blogCategory.id === categoryIdItem.id
+          );
+        });
+      });
+      const filteredSliderData = filteredBlogs?.filter(
+        (blog) => blog.id !== filterData.id
+      );
+
+      setSliderData(filteredSliderData);
+    }
+  }, [blogsList, params.id, categoryId]);
+
   return (
     <div>
       {sliderData?.map((blog, index) => (
-        // <p>{blog.title}</p>
         <BlogCard key={index} blogCard={blog} />
       ))}
-      {/* {sliderData.title} */}
-      {/* <BlogCard blogCard={sliderData} /> */}
     </div>
   );
 }

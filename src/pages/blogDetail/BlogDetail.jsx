@@ -19,7 +19,6 @@ function BlogDetail() {
   // console.log(blogData.categories);
   return (
     <div className={styles.blogDetail_page}>
-      {/* <Header /> */}
       <InnerBlog blogDetails={blogData} />
       <Slider categoryId={blogData.categories} />
     </div>

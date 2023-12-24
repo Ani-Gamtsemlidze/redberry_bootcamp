@@ -1,5 +1,5 @@
 import styles from "./BlogCard.module.css";
-import viewMoreArrow from "../../../../public/images/arrow.svg";
+import viewMoreArrow from "../../../../public/images/Arrow.svg";
 
 import { Link } from "react-router-dom";
 import BlogCategories from "../blogCategories/BlogCategories";
