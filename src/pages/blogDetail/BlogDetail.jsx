@@ -1,6 +1,10 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import BlogCard from "../../components/blogs/blogCard/BlogCard";
 import InnerBlog from "../../components/blogs/innerBlog/InnerBlog";
 import Header from "../../components/header/Header";
+import LoginBox from "../../components/loginBox/LoginBox";
+import { useLogin } from "../../context/LoginContextProvider";
 import DataFetcherGet from "../../utilis/DataFetcherGet";
 import styles from "./BlogDetail.module.css";
 
@@ -14,6 +18,7 @@ function BlogDetail() {
     <div className={styles.blogDetail_page}>
       <Header />
       <InnerBlog blogDetails={blogData} />
+      <div>Slider</div>
     </div>
   );
 }

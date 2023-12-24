@@ -17,9 +17,8 @@ function Banner() {
 function HomePage() {
   const { isPopUp } = useLogin();
   return (
-    <div style={{ backgroundColor: "#E4E3EB", position: "relative" }}>
+    <div className={styles.home_page}>
       <Header />
-      {isPopUp ? <LoginBox /> : null}
       <Banner />
       <Categories />
       <BlogsList />

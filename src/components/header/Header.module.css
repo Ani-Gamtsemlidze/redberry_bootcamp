@@ -18,7 +18,8 @@
   object-fit: contain;
 }
 
-.login button {
+.login button,
+a {
   background-color: #5d37f3;
   color: #fff;
   border: none;
@@ -27,4 +28,5 @@
   font-size: 14px;
   cursor: pointer;
   outline: none;
+  text-decoration: none;
 }
