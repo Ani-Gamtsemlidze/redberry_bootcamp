@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Header from "./components/header/Header";
 import { BlogContextProvider } from "./context/BlogContextProvider";
 import { LoginContextProvider } from "./context/LoginContextProvider";
 import BlogDetail from "./pages/blogDetail/BlogDetail";

@@ -37,8 +37,6 @@ function BlogContextProvider(props) {
   const filterHandler = (categoryId) => {
     seturlParams(categoryId);
   };
-  console.log(urlParams);
-
   return (
     <BlogThemeContext.Provider
       value={{

@@ -18,8 +18,7 @@
   object-fit: contain;
 }
 
-.login button,
-a {
+.header_btn {
   background-color: #5d37f3;
   color: #fff;
   border: none;

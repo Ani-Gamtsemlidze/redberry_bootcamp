@@ -16,9 +16,13 @@ const Header = () => {
         </div>
         <div className={styles.login}>
           {active ? (
-            <Link to="/addblog">დაამატე ბლოგი</Link>
+            <Link className={styles.header_btn} to="/addblog">
+              დაამატე ბლოგი
+            </Link>
           ) : (
-            <button onClick={handleLogin}>შესვლა</button>
+            <button className={styles.header_btn} onClick={handleLogin}>
+              შესვლა
+            </button>
           )}
         </div>
       </div>

@@ -15,10 +15,9 @@ function Banner() {
   );
 }
 function HomePage() {
-  const { isPopUp } = useLogin();
   return (
     <div className={styles.home_page}>
-      <Header />
+      {/* <Header /> */}
       <Banner />
       <Categories />
       <BlogsList />
