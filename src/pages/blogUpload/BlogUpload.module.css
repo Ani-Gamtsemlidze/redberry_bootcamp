@@ -1,0 +1,49 @@
+.form {
+  width: 600px;
+  margin: 0 auto;
+  /* background-color: #e4e3eb; */
+}
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+.author_title {
+  display: flex;
+}
+
+.description {
+  width: 600px;
+  height: 124px;
+}
+
+.date_category {
+  display: flex;
+}
+
+input[type="file" i] {
+  display: none;
+}
+
+.file {
+  background-color: #e6ebff;
+  width: 600px;
+  height: 180px;
+  border: 1px #85858d dashed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.img_file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.img_file img {
+  margin: 48px 0 24px;
+}
+
+span {
+  text-decoration: underline;
+  cursor: pointer;
+}
