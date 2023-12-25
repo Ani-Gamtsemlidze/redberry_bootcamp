@@ -1,83 +1,67 @@
 import Header from "../../components/header/Header";
 import styles from "./BlogUpload.module.css";
-import uploadPhoto from "../../../public/images/folder-add.svg";
+import Input from "../../components/form/input/Input";
+import UploadImage from "../../components/form/uploadImage/UploadImage";
 
 function BlogUpload() {
   return (
     <>
       <Header />
-      <div style={{ backgroundColor: "#FCFCFD", padding: "33px 240px 0" }}>
-        <h2>ბლოგის დამატება</h2>
+      <div style={{ backgroundColor: "#FCFCFD", padding: "33px 240px 100px" }}>
+        <h2 className={styles.page_title}>ბლოგის დამატება</h2>
         <form className={styles.form}>
-          <div className={styles.inputGroup}>
-            <label>ატვირთეთ ფოტო</label>
-            <div className={styles.file}>
-              <label className={styles.img_file} htmlFor="file">
-                <img src={uploadPhoto} alt="Upload icon" />
-                <input id="file" type="file" className={styles.fileInput} />
-                <p className={styles.file_info}>
-                  ჩააგდეთ ფაილი აქ ან{" "}
-                  <span className={styles.underline_text}>აირჩიეთ ფაილი</span>{" "}
-                </p>
-              </label>
-            </div>
-          </div>
+          <UploadImage />
           <div className={styles.author_title}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="authorInput">ავტორი *</label>
-              <input
-                id="authorInput"
+            <div className={styles.author}>
+              <Input
+                label="ავტორი"
+                id="author"
                 type="text"
                 placeholder="შეიყვანეთ ავტორი"
               />
-              <div className={styles.author_info}>
+              <div className={styles.info}>
                 <span>მინიმუმ 4 სიმბოლო </span>
                 <span>მინიმუმ ორი სიტყვა </span>
                 <span> მხოლოდ ქართული სიმბოლოები</span>
               </div>
             </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="titleInput">სათაური *</label>
-              <input
-                id="titleInput"
+            <div className={styles.title}>
+              <Input
+                label="სათაური"
+                id="title"
                 type="text"
                 placeholder="შეიყვანეთ სათაური"
               />
-              <span>მინიმუმ 2 სიმბოლო</span>
+              <span className={styles.info}>მინიმუმ 2 სიმბოლო</span>
             </div>
           </div>
 
-          <div className={styles.inputGroup}>
-            <label htmlFor="descriptionInput">აღწერა *</label>
-            <textarea
-              className={styles.description}
-              id="descriptionInput"
+          <div className={styles.description}>
+            <Input
+              label="აღწერა"
+              id="description"
+              textarea
               placeholder="შეიყვანეთ აღწერა"
             />
             <span>მინიმუმ 2 სიმბოლო</span>
           </div>
           <div className={styles.date_category}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="publishInput">გამოქვეყნების თარიღი *</label>
-              <input
-                id="publishInput"
-                type="text"
-                placeholder="შეიყვანეთ სათაური"
-              />
+            <div>
+              <Input label="გამოქვეყნების თარიღი" id="publish" type="date" />
             </div>
-            <div className={styles.inputGroup}>
-              <label htmlFor="categoryInput">კატეგორია *</label>
-              <input
-                id="categoryInput"
+            <div>
+              <Input
+                label="კატეგორია"
+                id="category"
                 type="text"
                 placeholder="აირჩიეთ კატეგორია"
               />
             </div>
           </div>
-          <div className={styles.inputGroup}>
-            <label htmlFor="categoryInput">ელ-ფოსტა</label>
-            <input
-              id="categoryInput"
+          <div>
+            <Input
+              label="ელ-ფოსტა"
+              id="email"
               type="text"
               placeholder="Example@redberry.ge"
             />
