@@ -6,6 +6,7 @@ export const BlogThemeContext = createContext();
 function BlogContextProvider(props) {
   const [blogsList, setBlogsList] = useState([]);
   const [urlParams, seturlParams] = useState([]);
+  const [userImage, setUserImage] = useState();
 
   const BASE_URL = "https://api.blog.redberryinternship.ge/api/blogs";
   const token =
@@ -37,12 +38,20 @@ function BlogContextProvider(props) {
   const filterHandler = (categoryId) => {
     seturlParams(categoryId);
   };
+
+  function handleChangeImage(e) {
+    const file = e.target.files[0];
+    const imgUrl = URL.createObjectURL(file);
+    setUserImage(imgUrl);
+  }
   return (
     <BlogThemeContext.Provider
       value={{
         blogsList,
         filterHandler,
         urlParams,
+        handleChangeImage,
+        userImage,
       }}
     >
       {props.children}

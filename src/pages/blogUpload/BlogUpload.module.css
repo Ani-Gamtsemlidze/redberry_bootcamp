@@ -19,6 +19,22 @@
   flex-direction: column;
 }
 
+/* for image
+*/
+.image_box {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0 0;
+}
+.file {
+  background-color: #e6ebff;
+  width: 600px;
+  height: 180px;
+  border: 1px #85858d dashed;
+  margin: 8px 0 24px;
+  border-radius: 12px;
+}
+
 .title span,
 .description span {
   font-size: 12px;

@@ -7,6 +7,7 @@ function Input({ label, id, textarea, ...props }) {
         <textarea
           className={styles.textarea}
           placeholder={"შეიყვანეთ აღწერა"}
+          {...props}
         />
       ) : (
         <input id={id} {...props} />
