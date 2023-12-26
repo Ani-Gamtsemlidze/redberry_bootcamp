@@ -19,6 +19,7 @@
 .author_date {
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 .author {
   font-size: 16px;
@@ -33,6 +34,7 @@
 
 .blog_title {
   min-height: 50px;
+  text-align: left;
 }
 
 .blog_title h2 {
@@ -42,6 +44,7 @@
 
 .description {
   margin-top: 16px;
+  text-align: left;
 }
 .description p {
   font-size: 16px;

@@ -6,7 +6,6 @@ import { useBlogs } from "../../context/BlogContextProvider";
 import axios from "axios";
 import calendar from "../../../public/images/calendar.svg";
 import { useState } from "react";
-import LoginBox from "../../components/loginBox/LoginBox";
 import SuccessPopUp from "../../components/popup/SuccessPopUp";
 import { Link } from "react-router-dom";
 
