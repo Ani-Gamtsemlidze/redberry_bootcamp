@@ -4,6 +4,7 @@ import Input from "../../components/form/input/Input";
 import UploadImage from "../../components/form/uploadImage/UploadImage";
 import { useBlogs } from "../../context/BlogContextProvider";
 import axios from "axios";
+import calendar from "../../../public/images/calendar.svg";
 import { useState } from "react";
 import LoginBox from "../../components/loginBox/LoginBox";
 import SuccessPopUp from "../../components/popup/SuccessPopUp";
@@ -111,14 +112,17 @@ function BlogUpload() {
               <span>მინიმუმ 2 სიმბოლო</span>
             </div>
             <div className={styles.date_category}>
-              <Input
-                label="გამოქვეყნების თარიღი"
-                autoComplete="off"
-                id="publish"
-                type="date"
-                name="date_input"
-                onChange={handleInputChange}
-              />
+              <div className={styles.date}>
+                <img className={styles.calendar} src={calendar} />
+                <Input
+                  label="გამოქვეყნების თარიღი"
+                  autoComplete="off"
+                  id="publish"
+                  type="date"
+                  name="date_input"
+                  onChange={handleInputChange}
+                />
+              </div>
               <Input
                 label="კატეგორია"
                 name="category_input"
