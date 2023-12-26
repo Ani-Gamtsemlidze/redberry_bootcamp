@@ -13,7 +13,7 @@ function Slider({ categoryId }) {
 
     if (filterData) {
       const filteredBlogs = blogsList?.filter((blog) => {
-        return categoryId.some((categoryIdItem) => {
+        return categoryId?.some((categoryIdItem) => {
           return blog.categories?.some(
             (blogCategory) => blogCategory.id === categoryIdItem.id
           );

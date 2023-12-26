@@ -50,7 +50,7 @@
   font-weight: 600;
   margin-left: 24px;
 }
-.form input {
+.login_input {
   width: 432px;
   border-radius: 12px;
   border: 1.5px solid #5d37f3;
@@ -59,7 +59,7 @@
   margin-top: 8px;
 }
 
-.form input::placeholder {
+.login_input::placeholder {
   font-size: 14px;
   color: #85858d;
 }
@@ -75,6 +75,7 @@
   text-align: center;
   cursor: pointer;
   outline: none;
+  text-decoration: none;
 }
 
 .error_info {
@@ -94,22 +95,4 @@
   height: 20px;
   object-fit: contain;
   margin-right: 8px;
-}
-
-.success_info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.success_info img {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-  margin: 64px 0 16px;
-}
-
-.success_info p {
-  color: #1a1a1f;
-  font-size: 20px;
-  font-weight: 700;
 }

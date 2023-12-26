@@ -3,7 +3,7 @@ import Header from "../components/header/Header";
 
 function RootLayout() {
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <Header />
       <Outlet />
     </div>

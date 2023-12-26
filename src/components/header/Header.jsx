@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../../public/images/redberry_logo.png";
 import { useLogin } from "../../context/LoginContextProvider";
 import LoginBox from "../loginBox/LoginBox";
@@ -7,6 +7,8 @@ import styles from "./Header.module.css";
 
 const Header = () => {
   const { active, handleLogin, isPopUp } = useLogin();
+  const location = useLocation();
+  console.log(location.pathname);
 
   const renderLoginButton = () => {
     if (active) {
@@ -27,10 +29,16 @@ const Header = () => {
   return (
     <>
       <div className={styles.header}>
-        <div className={styles.logo}>
+        <div
+          className={
+            location.pathname === "/addblog" ? styles.addblog_logo : styles.logo
+          }
+        >
           <img src={logo} alt="Redberry Logo" />
         </div>
-        <div className={styles.login}>{renderLoginButton()}</div>
+        {location.pathname === "/addblog" ? null : (
+          <div className={styles.login}>{renderLoginButton()}</div>
+        )}
       </div>
 
       {isPopUp && <LoginBox />}

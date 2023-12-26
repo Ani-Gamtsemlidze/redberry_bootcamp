@@ -2,9 +2,7 @@ import Categories from "../../components/categories/Categories";
 import Header from "../../components/header/Header";
 import banner from "../../../public/images/Blog.png";
 import styles from "./HomePage.module.css";
-import LoginBox from "../../components/loginBox/LoginBox";
 import BlogsList from "../../components/blogs/blogsList/BlogsList";
-import { useLogin } from "../../context/LoginContextProvider";
 
 function Banner() {
   return (
@@ -17,7 +15,6 @@ function Banner() {
 function HomePage() {
   return (
     <div className={styles.home_page}>
-      {/* <Header /> */}
       <Banner />
       <Categories />
       <BlogsList />

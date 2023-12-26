@@ -12,6 +12,12 @@
   width: 150px;
   height: 24px;
 }
+
+.addblog_logo {
+  width: 150px;
+  height: 24px;
+  margin: 0 auto;
+}
 .logo img {
   width: 100%;
   height: 100%;

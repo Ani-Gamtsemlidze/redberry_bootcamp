@@ -7,6 +7,8 @@ function BlogContextProvider(props) {
   const [blogsList, setBlogsList] = useState([]);
   const [urlParams, seturlParams] = useState([]);
 
+  //fetching blogs data from token
+
   const BASE_URL = "https://api.blog.redberryinternship.ge/api/blogs";
   const token =
     "5e4977d25fb8a029227f395a8d29b694059c94c67d1253b1930c154111b277c1";
@@ -18,6 +20,8 @@ function BlogContextProvider(props) {
       setBlogsList(blogData.data);
     }
   }, [blogData]);
+
+  // filter by categories
 
   useEffect(() => {
     if (urlParams.length < 1) {
@@ -38,6 +42,7 @@ function BlogContextProvider(props) {
     seturlParams(categoryId);
   };
 
+  // take values from form inputs
   const [inputValues, setInputValues] = useState({
     title_input: "",
     description_input: "",
@@ -68,28 +73,29 @@ function BlogContextProvider(props) {
     }
   };
 
-  useEffect(() => {
-    const inputNames = [
-      "title_input",
-      "description_input",
-      "author_input",
-      "date_input",
-      "category_input",
-      "email_input",
-      "upload_input",
-    ];
+  // handle with local storage
+  // useEffect(() => {
+  //   const inputNames = [
+  //     "title_input",
+  //     "description_input",
+  //     "author_input",
+  //     "date_input",
+  //     "category_input",
+  //     "email_input",
+  //     "upload_input",
+  //   ];
 
-    const storedValues = {};
+  //   const storedValues = {};
 
-    inputNames.forEach((name) => {
-      const storedValue = localStorage.getItem(name);
-      if (storedValue) {
-        console.log(storedValue);
-        storedValues[name] = storedValue;
-      }
-    });
-    setInputValues(storedValues);
-  }, []);
+  //   inputNames.forEach((name) => {
+  //     const storedValue = localStorage.getItem(name);
+  //     if (storedValue) {
+  //       console.log(storedValue);
+  //       storedValues[name] = storedValue;
+  //     }
+  //   });
+  //   setInputValues(storedValues);
+  // }, []);
 
   return (
     <BlogThemeContext.Provider

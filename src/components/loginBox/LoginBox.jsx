@@ -3,29 +3,30 @@ import close from "../../../public/images/close.svg";
 import error_img from "../../../public/images/error.svg";
 import success from "../../../public/images/success.svg";
 import { useLogin } from "../../context/LoginContextProvider";
+import SuccessPopUp from "../popup/SuccessPopUp";
+import { Link } from "react-router-dom";
 
 function LoginBox() {
   const {
     handleClose,
-    handleSuccessLogin,
     handleRequest,
     isEmailExist,
     setUserEmail,
     emailNotFound,
     userEmail,
+    handleSuccessLogin,
   } = useLogin();
 
   return (
     <div className={styles.login_container}>
       <div className={styles.login_box}>
         {isEmailExist ? (
-          <div className={styles.success_info}>
-            <img src={success} />
+          <SuccessPopUp>
             <p>წარმატებული ავტორიზაცია</p>
-            <button onClick={handleSuccessLogin} className={styles.btn}>
+            <Link to="/" onClick={handleSuccessLogin} className={styles.btn}>
               კარგი
-            </button>
-          </div>
+            </Link>
+          </SuccessPopUp>
         ) : (
           <>
             <div onClick={handleClose} className={styles.close}>
@@ -42,11 +43,12 @@ function LoginBox() {
               <label htmlFor="login">ელ-ფოსტა</label>
               <div className={styles.input_btn}>
                 <input
+                  className={styles.login_input}
                   id="login"
                   name="login"
                   onChange={(e) => setUserEmail(e.target.value)}
                   value={userEmail}
-                  type="text"
+                  // type="text"
                   placeholder="Example@redberry.ge"
                 />
                 {emailNotFound ? (

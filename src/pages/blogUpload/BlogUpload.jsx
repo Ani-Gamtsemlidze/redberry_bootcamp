@@ -4,10 +4,16 @@ import Input from "../../components/form/input/Input";
 import UploadImage from "../../components/form/uploadImage/UploadImage";
 import { useBlogs } from "../../context/BlogContextProvider";
 import axios from "axios";
-import { useEffect } from "react";
+import { useState } from "react";
+import LoginBox from "../../components/loginBox/LoginBox";
+import SuccessPopUp from "../../components/popup/SuccessPopUp";
+import { Link } from "react-router-dom";
 
 function BlogUpload() {
+  const [successPopUp, setSuccessPopUp] = useState(true);
   const { inputValues, handleInputChange } = useBlogs();
+
+  // send request to back for adding blog
 
   const BASE_URL = "https://api.blog.redberryinternship.ge/api/blogs";
   const token =
@@ -17,7 +23,7 @@ function BlogUpload() {
     e.preventDefault();
     e.stopPropagation();
 
-    // const formData = new FormData();
+    const formData = new FormData();
 
     formData.append("title", inputValues.title_input);
     formData.append("description", inputValues.description_input);
@@ -37,16 +43,18 @@ function BlogUpload() {
       });
       if (response) {
         console.log("data exists:", response.data);
+        setSuccessPopUp(true);
       }
     } catch (err) {
       console.error("Axios error:", err);
+      setSuccessPopUp(false);
     }
   };
 
   return (
     <>
       <Header />
-      <div style={{ backgroundColor: "#FCFCFD", padding: "33px 240px 100px" }}>
+      <div className={styles.form_page}>
         <h2 className={styles.page_title}>ბლოგის დამატება</h2>
         <form
           id="inputsForm"
@@ -134,7 +142,17 @@ function BlogUpload() {
               onChange={handleInputChange}
             />
           </div>
-          <button type="submit">გამოქვეყნება</button>
+          {successPopUp && (
+            <SuccessPopUp>
+              <p>ჩანაწერი წარმატებით დაემატა</p>
+              <Link to="/" className={styles.btn}>
+                მთავარ გვერდზე დაბრუნება
+              </Link>
+            </SuccessPopUp>
+          )}
+          <div className={styles.publish_button}>
+            <button type="submit">გამოქვეყნება</button>
+          </div>
         </form>
       </div>
     </>
