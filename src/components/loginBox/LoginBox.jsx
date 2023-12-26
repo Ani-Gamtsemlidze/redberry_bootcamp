@@ -1,7 +1,6 @@
 import styles from "./LoginBox.module.css";
 import close from "../../../public/images/close.svg";
 import error_img from "../../../public/images/error.svg";
-import success from "../../../public/images/success.svg";
 import { useLogin } from "../../context/LoginContextProvider";
 import SuccessPopUp from "../popup/SuccessPopUp";
 import { Link } from "react-router-dom";

@@ -8,11 +8,14 @@ input[type="file" i] {
 }
 .file {
   background-color: #e6ebff;
-  width: 600px;
+  max-width: 600px;
   height: 180px;
   border: 1px #85858d dashed;
   margin: 8px 0 24px;
   border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .img_file {
@@ -21,7 +24,7 @@ input[type="file" i] {
   align-items: center;
 }
 .img_file img {
-  margin: 48px 0 24px;
+  margin-bottom: 24px;
 }
 .file_info {
   font-size: 14px;

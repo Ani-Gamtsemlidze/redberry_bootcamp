@@ -54,62 +54,63 @@ function BlogUpload() {
   return (
     <>
       <Header />
-      <div className={styles.form_page}>
-        <h2 className={styles.page_title}>ბლოგის დამატება</h2>
-        <form
-          id="inputsForm"
-          action="/submit-url"
-          method="post"
-          onSubmit={handleCreateRequest}
-          className={styles.form}
-        >
-          <UploadImage />
 
-          <div className={styles.author_title}>
-            <div className={styles.author}>
-              <Input
-                label="ავტორი"
-                name="author_input"
-                autoComplete="off"
-                id="input"
-                type="text"
-                placeholder="შეიყვანეთ ავტორი"
-                onChange={handleInputChange}
-              />
-              <div className={styles.info}>
-                <span>მინიმუმ 4 სიმბოლო </span>
-                <span>მინიმუმ ორი სიტყვა </span>
-                <span> მხოლოდ ქართული სიმბოლოები</span>
+      <div className={styles.form_page}>
+        <div className="common_container">
+          <h2 className={styles.page_title}>ბლოგის დამატება</h2>
+          <form
+            id="inputsForm"
+            action="/submit-url"
+            method="post"
+            onSubmit={handleCreateRequest}
+            className={styles.form}
+          >
+            <UploadImage />
+
+            <div className={styles.author_title}>
+              <div className={styles.author}>
+                <Input
+                  label="ავტორი"
+                  name="author_input"
+                  autoComplete="off"
+                  id="input"
+                  type="text"
+                  placeholder="შეიყვანეთ ავტორი"
+                  onChange={handleInputChange}
+                />
+                <div className={styles.info}>
+                  <span>მინიმუმ 4 სიმბოლო </span>
+                  <span>მინიმუმ ორი სიტყვა </span>
+                  <span> მხოლოდ ქართული სიმბოლოები</span>
+                </div>
+              </div>
+              <div className={styles.title}>
+                <Input
+                  label="სათაური"
+                  name="title_input"
+                  autoComplete="off"
+                  id="title"
+                  type="text"
+                  placeholder="შეიყვანეთ სათაური"
+                  onChange={handleInputChange}
+                />
+                <span className={styles.info}>მინიმუმ 2 სიმბოლო</span>
               </div>
             </div>
-            <div className={styles.title}>
+
+            <div className={styles.description}>
               <Input
-                label="სათაური"
-                name="title_input"
+                label="აღწერა"
+                name="description_input"
                 autoComplete="off"
-                id="title"
-                type="text"
-                placeholder="შეიყვანეთ სათაური"
+                id="description"
+                textarea
+                placeholder="შეიყვანეთ აღწერა"
                 onChange={handleInputChange}
               />
-              <span className={styles.info}>მინიმუმ 2 სიმბოლო</span>
+              <span>მინიმუმ 2 სიმბოლო</span>
             </div>
-          </div>
-
-          <div className={styles.description}>
-            <Input
-              label="აღწერა"
-              name="description_input"
-              autoComplete="off"
-              id="description"
-              textarea
-              placeholder="შეიყვანეთ აღწერა"
-              onChange={handleInputChange}
-            />
-            <span>მინიმუმ 2 სიმბოლო</span>
-          </div>
-          <div className={styles.date_category}>
-            <div>
+            <div className={styles.date_category}>
               <Input
                 label="გამოქვეყნების თარიღი"
                 autoComplete="off"
@@ -118,8 +119,6 @@ function BlogUpload() {
                 name="date_input"
                 onChange={handleInputChange}
               />
-            </div>
-            <div>
               <Input
                 label="კატეგორია"
                 name="category_input"
@@ -130,30 +129,30 @@ function BlogUpload() {
                 onChange={handleInputChange}
               />
             </div>
-          </div>
-          <div>
-            <Input
-              label="ელ-ფოსტა"
-              name="email_input"
-              id="email"
-              type="text"
-              placeholder="Example@redberry.ge"
-              autoComplete="off"
-              onChange={handleInputChange}
-            />
-          </div>
-          {successPopUp && (
-            <SuccessPopUp>
-              <p>ჩანაწერი წარმატებით დაემატა</p>
-              <Link to="/" className={styles.btn}>
-                მთავარ გვერდზე დაბრუნება
-              </Link>
-            </SuccessPopUp>
-          )}
-          <div className={styles.publish_button}>
-            <button type="submit">გამოქვეყნება</button>
-          </div>
-        </form>
+            <div>
+              <Input
+                label="ელ-ფოსტა"
+                name="email_input"
+                id="email"
+                type="text"
+                placeholder="Example@redberry.ge"
+                autoComplete="off"
+                onChange={handleInputChange}
+              />
+            </div>
+            {successPopUp && (
+              <SuccessPopUp>
+                <p>ჩანაწერი წარმატებით დაემატა</p>
+                <Link to="/" className={styles.btn}>
+                  მთავარ გვერდზე დაბრუნება
+                </Link>
+              </SuccessPopUp>
+            )}
+            <div className={styles.publish_button}>
+              <button type="submit">გამოქვეყნება</button>
+            </div>
+          </form>
+        </div>
       </div>
     </>
   );

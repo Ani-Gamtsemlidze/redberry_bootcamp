@@ -4,7 +4,7 @@
 
 .form_page {
   background-color: #fcfcfd;
-  padding: 33px 0 0 240px;
+  padding: 33px 0 65px 0;
 }
 
 .popup_container {
@@ -27,21 +27,10 @@
   display: flex;
   flex-direction: column;
 }
-
-/* for image
-*/
 .image_box {
   display: flex;
   flex-direction: column;
   margin: 40px 0 0;
-}
-.file {
-  background-color: #e6ebff;
-  width: 600px;
-  height: 180px;
-  border: 1px #85858d dashed;
-  margin: 8px 0 24px;
-  border-radius: 12px;
 }
 
 .title span,
@@ -87,6 +76,7 @@ input[type="date" i]::placeholder {
 .publish_button {
   display: flex;
   justify-content: flex-end;
+  margin-top: 40px;
 }
 
 .publish_button button {
@@ -94,11 +84,11 @@ input[type="date" i]::placeholder {
   color: #fff;
   border: none;
   padding: 10px 20px;
-  width: 288px;
+  max-width: 288px;
+  width: 100%;
   border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
-  margin: 40px 0 110px;
 }
 .btn {
   background-color: #5d37f3;

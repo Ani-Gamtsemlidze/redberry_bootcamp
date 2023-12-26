@@ -7,10 +7,10 @@ function InnerBlog({ blogDetails }) {
   return (
     <>
       <div className={styles.blog_container}>
+        <Link to={"/"} className={styles.back_arrow}>
+          <img src={backArrow} />
+        </Link>
         <div className={styles.blog_image}>
-          <Link to={"/"} className={styles.back_arrow}>
-            <img src={backArrow} />
-          </Link>
           <img src={blogDetails.image} />
         </div>
         <div className={styles.author}>
