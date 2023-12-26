@@ -30,7 +30,7 @@ function LoginContextProvider(props) {
       });
       setResponseData(response);
       if (response) {
-        console.log("Email exists:", response);
+        // console.log("Email exists:", response);
         setIsEmailExist(true);
         setActive(true);
 

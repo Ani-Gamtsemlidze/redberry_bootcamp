@@ -10,7 +10,7 @@ import SuccessPopUp from "../../components/popup/SuccessPopUp";
 import { Link } from "react-router-dom";
 
 function BlogUpload() {
-  const [successPopUp, setSuccessPopUp] = useState(true);
+  const [successPopUp, setSuccessPopUp] = useState(false);
   const { inputValues, handleInputChange } = useBlogs();
 
   // send request to back for adding blog
@@ -42,7 +42,7 @@ function BlogUpload() {
         },
       });
       if (response) {
-        console.log("data exists:", response.data);
+        // console.log("data exists:", response.data);
         setSuccessPopUp(true);
       }
     } catch (err) {
@@ -70,7 +70,7 @@ function BlogUpload() {
               <Input
                 label="ავტორი"
                 name="author_input"
-                autocomplete="off"
+                autoComplete="off"
                 id="input"
                 type="text"
                 placeholder="შეიყვანეთ ავტორი"
@@ -86,7 +86,7 @@ function BlogUpload() {
               <Input
                 label="სათაური"
                 name="title_input"
-                autocomplete="off"
+                autoComplete="off"
                 id="title"
                 type="text"
                 placeholder="შეიყვანეთ სათაური"
@@ -100,7 +100,7 @@ function BlogUpload() {
             <Input
               label="აღწერა"
               name="description_input"
-              autocomplete="off"
+              autoComplete="off"
               id="description"
               textarea
               placeholder="შეიყვანეთ აღწერა"
@@ -112,7 +112,7 @@ function BlogUpload() {
             <div>
               <Input
                 label="გამოქვეყნების თარიღი"
-                autocomplete="off"
+                autoComplete="off"
                 id="publish"
                 type="date"
                 name="date_input"
@@ -123,7 +123,7 @@ function BlogUpload() {
               <Input
                 label="კატეგორია"
                 name="category_input"
-                autocomplete="off"
+                autoComplete="off"
                 id="category"
                 type="text"
                 placeholder="აირჩიეთ კატეგორია"
@@ -138,7 +138,7 @@ function BlogUpload() {
               id="email"
               type="text"
               placeholder="Example@redberry.ge"
-              autocomplete="off"
+              autoComplete="off"
               onChange={handleInputChange}
             />
           </div>

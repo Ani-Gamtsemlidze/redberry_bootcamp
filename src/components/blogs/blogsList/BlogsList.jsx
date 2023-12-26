@@ -6,7 +6,7 @@ function BlogsList() {
   const { blogsList } = useBlogs();
 
   return (
-    <div className={styles.blog_box}>
+    <div className={`common_container ` + styles.blog_box}>
       {blogsList?.map((blog, index) => (
         <BlogCard key={index} blogCard={blog} />
       ))}

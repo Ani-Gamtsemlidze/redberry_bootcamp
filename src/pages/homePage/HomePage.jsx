@@ -6,7 +6,7 @@ import BlogsList from "../../components/blogs/blogsList/BlogsList";
 
 function Banner() {
   return (
-    <div className={styles.banner}>
+    <div className={`common_container ` + styles.banner}>
       <h1 className={styles.title}>ბლოგი</h1>
       <img src={banner} />
     </div>

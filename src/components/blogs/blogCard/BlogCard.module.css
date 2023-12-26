@@ -1,6 +1,7 @@
 .blog {
-  width: 32%;
+  width: 33.333%;
   margin-bottom: 30px;
+  padding: 10px;
 }
 
 .blog_img {

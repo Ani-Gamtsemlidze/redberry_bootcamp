@@ -8,7 +8,6 @@ import styles from "./Header.module.css";
 const Header = () => {
   const { active, handleLogin, isPopUp } = useLogin();
   const location = useLocation();
-  console.log(location.pathname);
 
   const renderLoginButton = () => {
     if (active) {
@@ -28,13 +27,15 @@ const Header = () => {
 
   return (
     <>
-      <div className={styles.header}>
+      <div className={`common_container ` + styles.header}>
         <div
           className={
             location.pathname === "/addblog" ? styles.addblog_logo : styles.logo
           }
         >
-          <img src={logo} alt="Redberry Logo" />
+          <Link to="/">
+            <img src={logo} alt="Redberry Logo" />
+          </Link>
         </div>
         {location.pathname === "/addblog" ? null : (
           <div className={styles.login}>{renderLoginButton()}</div>
