@@ -2,54 +2,37 @@ import Header from "../../components/header/Header";
 import styles from "./BlogUpload.module.css";
 import Input from "../../components/form/input/Input";
 import UploadImage from "../../components/form/uploadImage/UploadImage";
-import { useState } from "react";
 import { useBlogs } from "../../context/BlogContextProvider";
 import axios from "axios";
+import { useEffect } from "react";
 
 function BlogUpload() {
-  //   const { userImage } = useBlogs();
-  //   console.log(userImage);
-  const [inputValues, setInputValues] = useState({
-    title_input: "",
-    desctiption_input: "",
-    author_input: "",
-    date_input: "",
-    category_input: "",
-    email_input: "",
-    upload_input: "",
-  });
-
-  const blogData = {
-    title: inputValues.title_input,
-    description: inputValues.desctiption_input,
-    author: inputValues.author_input,
-    publish_date: inputValues.date_input,
-    categories: inputValues.category_input,
-    email: inputValues.email_input,
-    image: inputValues.upload_input,
-  };
-  console.log(blogData);
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setInputValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  };
-  //   localStorage.setItem("values", inputValues);
+  const { inputValues, handleInputChange } = useBlogs();
 
   const BASE_URL = "https://api.blog.redberryinternship.ge/api/blogs";
   const token =
     "5e4977d25fb8a029227f395a8d29b694059c94c67d1253b1930c154111b277c1";
+
   const handleCreateRequest = async (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    // const formData = new FormData();
+
+    formData.append("title", inputValues.title_input);
+    formData.append("description", inputValues.description_input);
+    formData.append("image", inputValues.upload_input); // Ensure this is a File object from the input type="file"
+    formData.append("author", inputValues.author_input);
+    formData.append("publish_date", inputValues.date_input);
+    formData.append("categories", inputValues.category_input);
+    formData.append("email", inputValues.email_input);
+
     try {
-      const response = await axios.post(BASE_URL, {
+      const response = await axios.post(BASE_URL, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
-          data: `${blogData}`,
+          "Content-Type": "multipart/form-data",
         },
       });
       if (response) {
@@ -65,15 +48,22 @@ function BlogUpload() {
       <Header />
       <div style={{ backgroundColor: "#FCFCFD", padding: "33px 240px 100px" }}>
         <h2 className={styles.page_title}>ბლოგის დამატება</h2>
-        <form onSubmit={handleCreateRequest} className={styles.form}>
-          <UploadImage handleInputChange={(e) => handleInputChange(e)} />
+        <form
+          id="inputsForm"
+          action="/submit-url"
+          method="post"
+          onSubmit={handleCreateRequest}
+          className={styles.form}
+        >
+          <UploadImage />
 
           <div className={styles.author_title}>
             <div className={styles.author}>
               <Input
                 label="ავტორი"
                 name="author_input"
-                id="author"
+                autocomplete="off"
+                id="input"
                 type="text"
                 placeholder="შეიყვანეთ ავტორი"
                 onChange={handleInputChange}
@@ -88,6 +78,7 @@ function BlogUpload() {
               <Input
                 label="სათაური"
                 name="title_input"
+                autocomplete="off"
                 id="title"
                 type="text"
                 placeholder="შეიყვანეთ სათაური"
@@ -101,6 +92,7 @@ function BlogUpload() {
             <Input
               label="აღწერა"
               name="description_input"
+              autocomplete="off"
               id="description"
               textarea
               placeholder="შეიყვანეთ აღწერა"
@@ -112,6 +104,7 @@ function BlogUpload() {
             <div>
               <Input
                 label="გამოქვეყნების თარიღი"
+                autocomplete="off"
                 id="publish"
                 type="date"
                 name="date_input"
@@ -122,6 +115,7 @@ function BlogUpload() {
               <Input
                 label="კატეგორია"
                 name="category_input"
+                autocomplete="off"
                 id="category"
                 type="text"
                 placeholder="აირჩიეთ კატეგორია"
@@ -136,6 +130,7 @@ function BlogUpload() {
               id="email"
               type="text"
               placeholder="Example@redberry.ge"
+              autocomplete="off"
               onChange={handleInputChange}
             />
           </div>

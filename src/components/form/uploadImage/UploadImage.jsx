@@ -1,19 +1,12 @@
 import styles from "./UploadImage.module.css";
 import uploadPhoto from "../../../../public/images/folder-add.svg";
-import { useState } from "react";
 import { useBlogs } from "../../../context/BlogContextProvider";
 
-function UploadImage({ handleInputChange }) {
-  // const [userImage, setUserImage] = useState();
-  // function handleChangeImage(e) {
-  //   const file = e.target.files[0];
-  //   const imgUrl = URL.createObjectURL(file);
-  //   setUserImage(imgUrl);
-  // }
-  // const { handleChangeImage } = useBlogs();
+function UploadImage() {
+  const { handleFileInputChange } = useBlogs();
   return (
     <div className={styles.inputGroup}>
-      <label>ატვირთეთ ფოტო</label>
+      <label htmlFor="file">ატვირთეთ ფოტო</label>
       <div className={styles.file}>
         <label className={styles.img_file} htmlFor="file">
           <img src={uploadPhoto} alt="Upload icon" />
@@ -22,7 +15,7 @@ function UploadImage({ handleInputChange }) {
             id="file"
             type="file"
             className={styles.fileInput}
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => handleFileInputChange(e)}
           />
           <p className={styles.file_info}>
             ჩააგდეთ ფაილი აქ ან{" "}

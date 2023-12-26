@@ -6,7 +6,6 @@ export const BlogThemeContext = createContext();
 function BlogContextProvider(props) {
   const [blogsList, setBlogsList] = useState([]);
   const [urlParams, seturlParams] = useState([]);
-  const [userImage, setUserImage] = useState();
 
   const BASE_URL = "https://api.blog.redberryinternship.ge/api/blogs";
   const token =
@@ -39,19 +38,68 @@ function BlogContextProvider(props) {
     seturlParams(categoryId);
   };
 
-  function handleChangeImage(e) {
-    const file = e.target.files[0];
-    const imgUrl = URL.createObjectURL(file);
-    setUserImage(imgUrl);
-  }
+  const [inputValues, setInputValues] = useState({
+    title_input: "",
+    description_input: "",
+    author_input: "",
+    date_input: "",
+    category_input: [],
+    email_input: "",
+    upload_input: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    localStorage.setItem(name, value);
+    setInputValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
+  const handleFileInputChange = (event) => {
+    const file = event.target.files[0];
+    localStorage.setItem("image", file);
+    if (file) {
+      setInputValues((prevValues) => ({
+        ...prevValues,
+        upload_input: file,
+      }));
+    }
+  };
+
+  useEffect(() => {
+    const inputNames = [
+      "title_input",
+      "description_input",
+      "author_input",
+      "date_input",
+      "category_input",
+      "email_input",
+      "upload_input",
+    ];
+
+    const storedValues = {};
+
+    inputNames.forEach((name) => {
+      const storedValue = localStorage.getItem(name);
+      if (storedValue) {
+        console.log(storedValue);
+        storedValues[name] = storedValue;
+      }
+    });
+    setInputValues(storedValues);
+  }, []);
+
   return (
     <BlogThemeContext.Provider
       value={{
         blogsList,
         filterHandler,
         urlParams,
-        handleChangeImage,
-        userImage,
+        handleFileInputChange,
+        inputValues,
+        handleInputChange,
       }}
     >
       {props.children}
