@@ -7,7 +7,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import prevArrow from "../../../public/images/slider-arrow-prev.png";
 import nextArrow from "../../../public/images/slider-arrow-next.png";
 
-// Import Swiper styles
 import "swiper/css";
 
 function Slider({ categoryId }) {

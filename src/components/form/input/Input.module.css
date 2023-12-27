@@ -6,4 +6,9 @@
   padding: 12px 16px 0;
   outline: none;
   margin-top: 8px;
+  transition: 0.4s;
+  background-color: #fcfcfd;
+}
+.textarea:hover {
+  background-color: #f9f9fa;
 }

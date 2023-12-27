@@ -5,7 +5,7 @@ import UploadImage from "../../components/form/uploadImage/UploadImage";
 import { useBlogs } from "../../context/BlogContextProvider";
 import axios from "axios";
 import calendar from "../../../public/images/calendar.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SuccessPopUp from "../../components/popup/SuccessPopUp";
 import { Link } from "react-router-dom";
 
@@ -13,11 +13,25 @@ function BlogUpload() {
   const [successPopUp, setSuccessPopUp] = useState(false);
   const { inputValues, handleInputChange } = useBlogs();
 
-  // send request to back for adding blog
+  const email = inputValues.email_input;
+  const author = inputValues.author_input;
+
+  const authorSymbolsValidate =
+    author.trim().replace(/\s+/g, "").length < 4 && author.trim() !== "";
+
+  const authorLnegthValidate =
+    author.trim().split(" ").length < 2 && author.trim() !== "";
+  console.log(author.trim().split(" "));
+
+  const georgianAlphabetRegex = /^[\u10D0-\u10FF\s]+$/;
+  const valideAlphabet =
+    georgianAlphabetRegex.test(author) && author.trim() !== "";
 
   const BASE_URL = "https://api.blog.redberryinternship.ge/api/blogs";
   const token =
     "5e4977d25fb8a029227f395a8d29b694059c94c67d1253b1930c154111b277c1";
+
+  const validateEmmail = email !== "" && !email.trim().includes("@redberry.ge");
 
   const handleCreateRequest = async (e) => {
     e.preventDefault();
@@ -79,9 +93,40 @@ function BlogUpload() {
                   onChange={handleInputChange}
                 />
                 <div className={styles.info}>
-                  <span>მინიმუმ 4 სიმბოლო </span>
-                  <span>მინიმუმ ორი სიტყვა </span>
-                  <span> მხოლოდ ქართული სიმბოლოები</span>
+                  <span
+                    style={{
+                      color: authorSymbolsValidate
+                        ? "red"
+                        : inputValues.author_input === ""
+                        ? "grey"
+                        : "green",
+                    }}
+                  >
+                    მინიმუმ 4 სიმბოლო{" "}
+                  </span>
+                  <span
+                    style={{
+                      color: authorLnegthValidate
+                        ? "red"
+                        : author === ""
+                        ? "grey"
+                        : "green",
+                    }}
+                  >
+                    მინიმუმ ორი სიტყვა{" "}
+                  </span>
+                  <span
+                    style={{
+                      color: valideAlphabet
+                        ? "green"
+                        : author === ""
+                        ? "grey"
+                        : "red",
+                    }}
+                  >
+                    {" "}
+                    მხოლოდ ქართული სიმბოლოები
+                  </span>
                 </div>
               </div>
               <div className={styles.title}>
@@ -134,6 +179,13 @@ function BlogUpload() {
             </div>
             <div>
               <Input
+                className={
+                  validateEmmail
+                    ? styles.error_border
+                    : inputValues.email_input
+                    ? styles.success_border
+                    : ""
+                }
                 label="ელ-ფოსტა"
                 name="email_input"
                 id="email"
@@ -142,6 +194,11 @@ function BlogUpload() {
                 autoComplete="off"
                 onChange={handleInputChange}
               />
+              {validateEmmail && (
+                <p style={{ color: "#EA1919", fontSize: "12px" }}>
+                  მეილი უნდა მთავრდებოდეს @redberry.ge- ით
+                </p>
+              )}
             </div>
             {successPopUp && (
               <SuccessPopUp>

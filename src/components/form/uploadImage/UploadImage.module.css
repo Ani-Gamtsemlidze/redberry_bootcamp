@@ -16,6 +16,11 @@ input[type="file" i] {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.4s;
+}
+
+.file:hover {
+  background-color: #f1effb;
 }
 
 .img_file {
