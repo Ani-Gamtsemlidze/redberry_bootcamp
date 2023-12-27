@@ -2,24 +2,30 @@ import Header from "../../components/header/Header";
 import styles from "./BlogUpload.module.css";
 import Input from "../../components/form/input/Input";
 import UploadImage from "../../components/form/uploadImage/UploadImage";
-import { useBlogs } from "../../context/BlogContextProvider";
 import axios from "axios";
 import calendar from "../../../public/images/calendar.svg";
 import { useEffect, useState } from "react";
 import SuccessPopUp from "../../components/popup/SuccessPopUp";
 import { Link } from "react-router-dom";
+import MultipleSelectChip from "../../components/form/Select/Select";
+import { useUpload } from "../../context/UploadBlogContext";
+import { useBlogs } from "../../context/BlogContextProvider";
+import DataFetcherGet from "../../utilis/DataFetcherGet";
 
 function BlogUpload() {
   const [successPopUp, setSuccessPopUp] = useState(false);
-  const { inputValues, handleInputChange } = useBlogs();
-
+  const { inputValues, handleInputChange } = useUpload();
+  const [borderColor, setBorderColor] = useState(false);
+  const Category_URL = "https://api.blog.redberryinternship.ge/api/categories";
+  const { blogData } = DataFetcherGet(Category_URL);
+  console.log(blogData);
   const email = inputValues.email_input;
   const author = inputValues.author_input;
 
   const authorSymbolsValidate =
     author.trim().replace(/\s+/g, "").length < 4 && author.trim() !== "";
 
-  const authorLnegthValidate =
+  const authorWordsValidate =
     author.trim().split(" ").length < 2 && author.trim() !== "";
   console.log(author.trim().split(" "));
 
@@ -32,6 +38,23 @@ function BlogUpload() {
     "5e4977d25fb8a029227f395a8d29b694059c94c67d1253b1930c154111b277c1";
 
   const validateEmmail = email !== "" && !email.trim().includes("@redberry.ge");
+  const title = inputValues.title_input;
+
+  const titleValid = title.trim().length < 2;
+
+  useEffect(() => {
+    if (valideAlphabet && authorSymbolsValidate && authorWordsValidate) {
+      setBorderColor("red");
+    } else {
+      if (valideAlphabet || authorSymbolsValidate || authorWordsValidate) {
+        setBorderColor("green");
+      } else {
+        setBorderColor("grey");
+      }
+    }
+  }, [authorWordsValidate, valideAlphabet, authorSymbolsValidate]);
+
+  console.log(inputValues.upload_input);
 
   const handleCreateRequest = async (e) => {
     e.preventDefault();
@@ -56,7 +79,6 @@ function BlogUpload() {
         },
       });
       if (response) {
-        // console.log("data exists:", response.data);
         setSuccessPopUp(true);
       }
     } catch (err) {
@@ -84,6 +106,12 @@ function BlogUpload() {
             <div className={styles.author_title}>
               <div className={styles.author}>
                 <Input
+                  // className={
+                  //   validAuthor && valideAlphabet
+                  //     ? styles.success_border
+                  //     : styles.error_border
+                  // }
+                  style={{ border: `1px solid ${borderColor}` }}
                   label="ავტორი"
                   name="author_input"
                   autoComplete="off"
@@ -106,7 +134,7 @@ function BlogUpload() {
                   </span>
                   <span
                     style={{
-                      color: authorLnegthValidate
+                      color: authorWordsValidate
                         ? "red"
                         : author === ""
                         ? "grey"
@@ -131,6 +159,13 @@ function BlogUpload() {
               </div>
               <div className={styles.title}>
                 <Input
+                  className={
+                    titleValid && title.trim() !== ""
+                      ? styles.error_border
+                      : title
+                      ? styles.success_border
+                      : ""
+                  }
                   label="სათაური"
                   name="title_input"
                   autoComplete="off"
@@ -139,12 +174,31 @@ function BlogUpload() {
                   placeholder="შეიყვანეთ სათაური"
                   onChange={handleInputChange}
                 />
-                <span className={styles.info}>მინიმუმ 2 სიმბოლო</span>
+                <span
+                  style={{
+                    color:
+                      titleValid && title.trim() !== ""
+                        ? "red"
+                        : title === ""
+                        ? "grey"
+                        : "green",
+                  }}
+                  // className={styles.info}
+                >
+                  მინიმუმ 2 სიმბოლო
+                </span>
               </div>
             </div>
 
             <div className={styles.description}>
               <Input
+                className={
+                  `test ` +
+                  (inputValues.description_input.length < 2 &&
+                  inputValues.description_input.trim() !== ""
+                    ? styles.error_border
+                    : styles.success_border)
+                }
                 label="აღწერა"
                 name="description_input"
                 autoComplete="off"
@@ -176,6 +230,7 @@ function BlogUpload() {
                 placeholder="აირჩიეთ კატეგორია"
                 onChange={handleInputChange}
               />
+              <MultipleSelectChip />
             </div>
             <div>
               <Input

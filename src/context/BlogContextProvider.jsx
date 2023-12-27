@@ -6,6 +6,7 @@ export const BlogThemeContext = createContext();
 function BlogContextProvider(props) {
   const [blogsList, setBlogsList] = useState([]);
   const [urlParams, seturlParams] = useState([]);
+  const [validSymbols, setValidSymbols] = useState(false);
 
   //fetching blogs data from token
 
@@ -42,70 +43,12 @@ function BlogContextProvider(props) {
     seturlParams(categoryId);
   };
 
-  // take values from form inputs
-  const [inputValues, setInputValues] = useState({
-    title_input: "",
-    description_input: "",
-    author_input: "",
-    date_input: "",
-    category_input: [],
-    email_input: "",
-    upload_input: "",
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    localStorage.setItem(name, value);
-    setInputValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-  };
-
-  const handleFileInputChange = (event) => {
-    const file = event.target.files[0];
-    localStorage.setItem("image", file);
-    if (file) {
-      setInputValues((prevValues) => ({
-        ...prevValues,
-        upload_input: file,
-      }));
-    }
-  };
-
-  // handle with local storage
-  // useEffect(() => {
-  //   const inputNames = [
-  //     "title_input",
-  //     "description_input",
-  //     "author_input",
-  //     "date_input",
-  //     "category_input",
-  //     "email_input",
-  //     "upload_input",
-  //   ];
-
-  //   const storedValues = {};
-
-  //   inputNames.forEach((name) => {
-  //     const storedValue = localStorage.getItem(name);
-  //     if (storedValue) {
-  //       console.log(storedValue);
-  //       storedValues[name] = storedValue;
-  //     }
-  //   });
-  //   setInputValues(storedValues);
-  // }, []);
-
   return (
     <BlogThemeContext.Provider
       value={{
         blogsList,
         filterHandler,
         urlParams,
-        handleFileInputChange,
-        inputValues,
-        handleInputChange,
       }}
     >
       {props.children}

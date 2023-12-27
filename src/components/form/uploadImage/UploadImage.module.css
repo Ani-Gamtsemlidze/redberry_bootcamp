@@ -44,3 +44,24 @@ input[type="file" i] {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.uploaded {
+  max-width: 600px;
+  background-color: #f2f2fa;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gallery_name {
+  display: flex;
+  align-items: center;
+}
+.uploaded img {
+  margin: 16px 12px 16px 16px;
+}
+.uploaded p {
+  font-size: 14px;
+  color: #1a1a1f;
+}
