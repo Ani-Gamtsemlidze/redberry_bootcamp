@@ -33,11 +33,11 @@ export default function MultipleSelectChip({ selectArray }) {
   const { handleInputChange } = useUpload();
   const [listName, setListName] = React.useState([]);
 
-  const handleChange = (event) => {
-    handleInputChange(event);
+  const handleChange = (e) => {
+    handleInputChange(e);
     const {
       target: { value },
-    } = event;
+    } = e;
     setListName(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
@@ -56,6 +56,7 @@ export default function MultipleSelectChip({ selectArray }) {
           multiple
           value={listName}
           onChange={handleChange}
+          inputProps={{ name: "category_input" }}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>

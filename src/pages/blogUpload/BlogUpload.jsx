@@ -14,23 +14,26 @@ import DataFetcherGet from "../../utilis/DataFetcherGet";
 
 function BlogUpload() {
   const [successPopUp, setSuccessPopUp] = useState(false);
-  const { inputValues, handleInputChange } = useUpload();
-  const [borderColor, setBorderColor] = useState("green");
   const [isAuthorValid, setIsAuthorValid] = useState(false);
+
+  const { inputValues, handleInputChange } = useUpload();
+
   const Category_URL = "https://api.blog.redberryinternship.ge/api/categories";
   const { blogData } = DataFetcherGet(Category_URL);
-
-  console.log(inputValues.category_input);
-  console.log(inputValues);
 
   const email = inputValues.email_input;
   const author = inputValues.author_input;
 
+  // check symbols length in author input
   const authorSymbolsValidate =
     author.trim().replace(/\s+/g, "").length < 4 && author.trim() !== "";
 
+  // check words length in author input
+
   const authorWordsValidate =
     author.trim().split(" ").length < 2 && author.trim() !== "";
+
+  // check georgian alphabet in author input
 
   const georgianAlphabetRegex = /^[\u10D0-\u10FF\s]+$/;
   const valideAlphabet =
@@ -45,25 +48,15 @@ function BlogUpload() {
 
   const titleValid = title.trim().length < 2;
 
-  // function authorValid() {
-  //   if (!valideAlphabet || !authorSymbolsValidate || !authorWordsValidate) {
-  //     setBorderColor("red");
-  //   } else {
-  //     // If all conditions are met, you might want to set the border color to green or another color
-  //     setBorderColor("green");
-  //   }
-  // }
   useEffect(() => {
     // Check all conditions for author validation
     const isValidAuthor =
       valideAlphabet && !authorSymbolsValidate && !authorWordsValidate;
-
-    // Set border color based on validation result
-    // setBorderColor(isValidAuthor ? "green" : author === "" ? "grey" : "red");
     setIsAuthorValid(isValidAuthor);
   }, [author, authorWordsValidate, valideAlphabet, authorSymbolsValidate]);
 
   const handleCreateRequest = async (e) => {
+    // send request on publish button
     e.preventDefault();
     e.stopPropagation();
 
@@ -119,7 +112,6 @@ function BlogUpload() {
                       ? styles.default_border
                       : styles.error_border
                   }
-                  // style={{ border: `1px solid ${borderColor}` }}
                   label="ავტორი"
                   name="author_input"
                   autoComplete="off"
@@ -229,6 +221,16 @@ function BlogUpload() {
                   onChange={handleInputChange}
                 />
               </div>
+
+              {/* <Input
+                label="კატეგორიები"
+                name="category_input"
+                id="category"
+                type="text"
+                placeholder="Example@redberry.ge"
+                autoComplete="off"
+                onChange={handleInputChange}
+              /> */}
 
               <MultipleSelectChip selectArray={blogData} />
             </div>
