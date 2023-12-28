@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
+import { useUpload } from "../../../context/UploadBlogContext";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -18,41 +19,26 @@ const MenuProps = {
     },
   },
 };
-let category = [
-  { name: "კვლება", id: 1 },
-  { name: "კვლება", id: 1 },
-];
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
-let x = [1, 2];
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
 
-export default function MultipleSelectChip() {
-  const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+// function getStyles(name, personName, theme) {
+//   return {
+//     fontWeight:
+//       personName.indexOf(name) === -1
+//         ? theme.typography.fontWeightRegular
+//         : theme.typography.fontWeightMedium,
+//   };
+// }
+
+export default function MultipleSelectChip({ selectArray }) {
+  const { handleInputChange } = useUpload();
+  const [listName, setListName] = React.useState([]);
 
   const handleChange = (event) => {
+    handleInputChange(event);
     const {
       target: { value },
     } = event;
-    setPersonName(
+    setListName(
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
@@ -60,31 +46,40 @@ export default function MultipleSelectChip() {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-chip-label">Chip</InputLabel>
+      <FormControl sx={{ m: 1, width: 288 }}>
+        <div className="white_shade"></div>
+        <InputLabel id="demo-multiple-chip-label">კატეგორია</InputLabel>
         <Select
+          className="upload_select"
           labelId="demo-multiple-chip-label"
           id="demo-multiple-chip"
           multiple
-          value={personName}
+          value={listName}
           onChange={handleChange}
           input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
           renderValue={(selected) => (
             <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+              {console.log(selected)}
               {selected.map((value) => (
-                <Chip key={value} label={value} />
+                <>
+                  <Chip key={value} label={value} />
+                </>
               ))}
             </Box>
           )}
           MenuProps={MenuProps}
         >
-          {names.map((name) => (
+          {selectArray.data?.map((name) => (
             <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
+              key={name.id}
+              value={name.title}
+              className="select_list"
+              style={{
+                backgroundColor: name.background_color,
+                color: name.text_color,
+              }}
             >
-              {name}
+              {name.title}
             </MenuItem>
           ))}
         </Select>

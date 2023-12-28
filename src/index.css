@@ -104,3 +104,88 @@
   transition: 0.4s;
   background-color: #fcfcfd;
 }
+
+.upload_select {
+  width: 288px;
+  height: 44px;
+  border-radius: 12px !important;
+  padding-right: 35px;
+}
+#demo-multiple-chip-label,
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+  top: -7px !important;
+  font-family: "FiraGo" !important;
+}
+
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  flex-wrap: wrap !important;
+  display: flex;
+  border-radius: 12px;
+  border: 1px solid #e4e3eb;
+  background-color: #fff;
+  margin-top: 3px;
+}
+.select_list {
+  border-radius: 12px !important;
+  width: auto;
+  max-width: max-content;
+  margin: 0px 5px 5px 5px !important;
+  font-family: "FiraGo" !important;
+}
+
+.css-3dzjca-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+  box-shadow: unset !important;
+  background: transparent !important;
+  margin-top: 3px;
+}
+
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  opacity: 0 !important;
+}
+
+.css-14lo706 {
+  display: none !important;
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline .legend {
+  display: none !important;
+}
+
+.css-yi3mkw {
+  flex-wrap: unset !important;
+}
+
+.css-bpeome-MuiSvgIcon-root-MuiSelect-icon,
+.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+  z-index: 100 !important;
+}
+
+.white_shade {
+  background: #fff;
+  width: 34px;
+  position: absolute;
+  top: 0px;
+  right: 2px;
+  height: calc(100% - 2px);
+  border-radius: 0 12px 12px 0;
+  z-index: 11;
+}
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-width: 1px !important;
+  height: 44px !important;
+}
+
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 1.5px 14px !important;
+}
+
+.css-yjsfm1,
+.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+  display: none !important;
+}
+
+.css-yi3mkw {
+  margin-bottom: 5px !important;
+}

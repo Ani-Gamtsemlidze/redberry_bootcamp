@@ -15,10 +15,14 @@ import DataFetcherGet from "../../utilis/DataFetcherGet";
 function BlogUpload() {
   const [successPopUp, setSuccessPopUp] = useState(false);
   const { inputValues, handleInputChange } = useUpload();
-  const [borderColor, setBorderColor] = useState(false);
+  const [borderColor, setBorderColor] = useState("green");
+  const [isAuthorValid, setIsAuthorValid] = useState(false);
   const Category_URL = "https://api.blog.redberryinternship.ge/api/categories";
   const { blogData } = DataFetcherGet(Category_URL);
-  console.log(blogData);
+
+  console.log(inputValues.category_input);
+  console.log(inputValues);
+
   const email = inputValues.email_input;
   const author = inputValues.author_input;
 
@@ -27,7 +31,6 @@ function BlogUpload() {
 
   const authorWordsValidate =
     author.trim().split(" ").length < 2 && author.trim() !== "";
-  console.log(author.trim().split(" "));
 
   const georgianAlphabetRegex = /^[\u10D0-\u10FF\s]+$/;
   const valideAlphabet =
@@ -42,19 +45,23 @@ function BlogUpload() {
 
   const titleValid = title.trim().length < 2;
 
+  // function authorValid() {
+  //   if (!valideAlphabet || !authorSymbolsValidate || !authorWordsValidate) {
+  //     setBorderColor("red");
+  //   } else {
+  //     // If all conditions are met, you might want to set the border color to green or another color
+  //     setBorderColor("green");
+  //   }
+  // }
   useEffect(() => {
-    if (valideAlphabet && authorSymbolsValidate && authorWordsValidate) {
-      setBorderColor("red");
-    } else {
-      if (valideAlphabet || authorSymbolsValidate || authorWordsValidate) {
-        setBorderColor("green");
-      } else {
-        setBorderColor("grey");
-      }
-    }
-  }, [authorWordsValidate, valideAlphabet, authorSymbolsValidate]);
+    // Check all conditions for author validation
+    const isValidAuthor =
+      valideAlphabet && !authorSymbolsValidate && !authorWordsValidate;
 
-  console.log(inputValues.upload_input);
+    // Set border color based on validation result
+    // setBorderColor(isValidAuthor ? "green" : author === "" ? "grey" : "red");
+    setIsAuthorValid(isValidAuthor);
+  }, [author, authorWordsValidate, valideAlphabet, authorSymbolsValidate]);
 
   const handleCreateRequest = async (e) => {
     e.preventDefault();
@@ -82,7 +89,6 @@ function BlogUpload() {
         setSuccessPopUp(true);
       }
     } catch (err) {
-      console.error("Axios error:", err);
       setSuccessPopUp(false);
     }
   };
@@ -106,12 +112,14 @@ function BlogUpload() {
             <div className={styles.author_title}>
               <div className={styles.author}>
                 <Input
-                  // className={
-                  //   validAuthor && valideAlphabet
-                  //     ? styles.success_border
-                  //     : styles.error_border
-                  // }
-                  style={{ border: `1px solid ${borderColor}` }}
+                  className={
+                    isAuthorValid
+                      ? styles.success_border
+                      : author === ""
+                      ? styles.default_border
+                      : styles.error_border
+                  }
+                  // style={{ border: `1px solid ${borderColor}` }}
                   label="ავტორი"
                   name="author_input"
                   autoComplete="off"
@@ -221,16 +229,8 @@ function BlogUpload() {
                   onChange={handleInputChange}
                 />
               </div>
-              <Input
-                label="კატეგორია"
-                name="category_input"
-                autoComplete="off"
-                id="category"
-                type="text"
-                placeholder="აირჩიეთ კატეგორია"
-                onChange={handleInputChange}
-              />
-              <MultipleSelectChip />
+
+              <MultipleSelectChip selectArray={blogData} />
             </div>
             <div>
               <Input

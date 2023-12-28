@@ -1,28 +1,63 @@
 import { createContext, useContext, useState } from "react";
 
 export const UploadBlogTheme = createContext();
+
+let catArray = [
+  { id: 1, title: "მარკეტი" },
+  { id: 2, title: "აპლიკაცია" },
+  { id: 3, title: "ხელოვნური ინტელექტი" },
+  { id: 4, title: "UI/UX" },
+  { id: 5, title: "კვლევა" },
+  { id: 6, title: "Figma" },
+  { id: 7, title: "დამზადება" },
+  { id: 8, title: "კოპიუტერული მეცნიერება" },
+  { id: 9, title: "სამუშაო გარემო" },
+  { id: 10, title: "მუსიკა" },
+  { id: 11, title: "სპორტი" },
+  { id: 12, title: "სამშენებლო" },
+  { id: 13, title: "სამედიცინო" },
+  { id: 14, title: "სხვა" },
+];
 function UploadBlogContext(props) {
   const [inputValues, setInputValues] = useState({
     title_input: "",
     description_input: "",
     author_input: "",
     date_input: "",
-    category_input: [],
+    category_input: "",
     email_input: "",
     upload_input: "",
   });
 
+  function getIdsByTitles(titleArray) {
+    return titleArray.map((title) => {
+      const catItem = catArray.find((item) => item.title === title);
+      return catItem ? catItem.id : null;
+    });
+  }
+  //
+  function isEmptyArray(emptyArrVal) {
+    return (
+      typeof emptyArrVal === "string" ||
+      (Array.isArray(emptyArrVal) && emptyArrVal.length === 0)
+    );
+  }
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    console.log(name);
-    localStorage.setItem(name, value);
-    setInputValues((prevValues) => ({
-      ...prevValues,
-      [name]: value,
-    }));
-
-    if (name.trim().replace(/\s+/g, "").length < 4 && name.trim() !== "") {
-      setValidSymbols(false);
+    if (isEmptyArray(value) == false) {
+      const result = getIdsByTitles(value);
+      console.log(result);
+      setInputValues((prevValues) => ({
+        ...prevValues,
+        category_input: value,
+      }));
+      localStorage.setItem(name, value);
+    } else {
+      setInputValues((prevValues) => ({
+        ...prevValues,
+        [name]: value,
+      }));
     }
   };
 

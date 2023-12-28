@@ -10,7 +10,6 @@ function Categories() {
   const [categoryId, setCategoryId] = useState([]); // categoryIDs
   const { filterHandler } = useBlogs();
   const { blogData } = DataFetcherGet(BASE_URL);
-  console.log(blogData);
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search); // by location search it returns url after ?
