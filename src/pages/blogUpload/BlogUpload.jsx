@@ -13,7 +13,7 @@ import emailInfo from "../../../public/images/info-circle.svg";
 import back_icon from "../../../public/images/back_tohome.svg";
 
 function BlogUpload() {
-  const [isAuthorValid, setIsAuthorValid] = useState(false);
+  const [authErr, setIsAuthorValid] = useState(false);
 
   const {
     inputValues,
@@ -32,19 +32,19 @@ function BlogUpload() {
   const date = inputValues.date_input;
 
   // check symbols length in author input
-  const authorSymbolsValidate =
+  const hasSymbolsErr =
     author?.trim().replace(/\s+/g, "")?.length < 4 && author?.trim() !== "";
 
   // check words length in author input
 
-  const authorWordsValidate =
+  const hasWordsErr =
     author?.trim().split(" ")?.length < 2 && author?.trim() !== "";
 
   // check georgian alphabet in author input
 
   const georgianAlphabetRegex = /^[\u10D0-\u10FF\s]+$/;
-  const valideAlphabet =
-    georgianAlphabetRegex.test(author) && author?.trim() !== "";
+  const hasAlphabetError =
+    !georgianAlphabetRegex.test(author) && author?.trim() !== "";
 
   const validateEmmail =
     email !== "" && !email?.trim().includes("@redberry.ge");
@@ -53,10 +53,14 @@ function BlogUpload() {
   const titleValid = title?.trim()?.length < 2;
   useEffect(() => {
     // Check all conditions for author validation
-    const isValidAuthor =
-      valideAlphabet && !authorSymbolsValidate && !authorWordsValidate;
-    setIsAuthorValid(isValidAuthor);
-  }, [author, authorWordsValidate, valideAlphabet, authorSymbolsValidate]);
+    const authorHasErr = hasAlphabetError || hasSymbolsErr || hasWordsErr;
+    setIsAuthorValid(authorHasErr);
+    console.log(authorHasErr, "authorHasErr");
+    console.log(hasAlphabetError, "hasAlphabetError");
+    console.log(hasSymbolsErr, "hasSymbolsErr");
+    console.log(hasWordsErr, "hasWordsErr");
+    console.log("*********");
+  }, [author, hasWordsErr, hasAlphabetError, hasSymbolsErr]);
 
   return (
     <>
@@ -80,10 +84,10 @@ function BlogUpload() {
             <div className={styles.author}>
               <Input
                 className={
-                  isAuthorValid
-                    ? styles.success_border
-                    : author === ""
+                  author === ""
                     ? styles.default_border
+                    : !authErr
+                    ? styles.success_border
                     : styles.error_border
                 }
                 label="ავტორი"
@@ -101,7 +105,7 @@ function BlogUpload() {
               <div className={styles.info}>
                 <span
                   style={{
-                    color: authorSymbolsValidate
+                    color: hasSymbolsErr
                       ? "#EA1919"
                       : inputValues.author_input === ""
                       ? "#85858D"
@@ -112,7 +116,7 @@ function BlogUpload() {
                 </span>
                 <span
                   style={{
-                    color: authorWordsValidate
+                    color: hasWordsErr
                       ? "#EA1919"
                       : author === ""
                       ? "#85858D"
@@ -123,11 +127,12 @@ function BlogUpload() {
                 </span>
                 <span
                   style={{
-                    color: valideAlphabet
-                      ? "#14D81C"
-                      : author === ""
-                      ? "#85858D"
-                      : "#EA1919",
+                    color:
+                      author === ""
+                        ? "#85858D"
+                        : !hasAlphabetError
+                        ? "#14D81C"
+                        : "#EA1919",
                   }}
                 >
                   {" "}
@@ -175,7 +180,7 @@ function BlogUpload() {
           <div className={styles.description}>
             <Input
               className={
-                `description_textarea ` +
+                description_textarea +
                 (description?.length < 2 && description?.trim() !== ""
                   ? styles.error_border
                   : description === ""
