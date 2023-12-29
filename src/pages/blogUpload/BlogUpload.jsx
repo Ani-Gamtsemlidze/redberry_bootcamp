@@ -55,11 +55,6 @@ function BlogUpload() {
     // Check all conditions for author validation
     const authorHasErr = hasAlphabetError || hasSymbolsErr || hasWordsErr;
     setIsAuthorValid(authorHasErr);
-    console.log(authorHasErr, "authorHasErr");
-    console.log(hasAlphabetError, "hasAlphabetError");
-    console.log(hasSymbolsErr, "hasSymbolsErr");
-    console.log(hasWordsErr, "hasWordsErr");
-    console.log("*********");
   }, [author, hasWordsErr, hasAlphabetError, hasSymbolsErr]);
 
   return (
