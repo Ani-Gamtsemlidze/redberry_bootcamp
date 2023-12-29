@@ -1,6 +1,9 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 export const UploadBlogTheme = createContext();
+
+// categories array
 
 let catArray = [
   { id: 1, title: "მარკეტი" },
@@ -19,6 +22,11 @@ let catArray = [
   { id: 14, title: "სხვა" },
 ];
 function UploadBlogContext(props) {
+  const BASE_URL = "https://api.blog.redberryinternship.ge/api/blogs";
+  const token =
+    "5e4977d25fb8a029227f395a8d29b694059c94c67d1253b1930c154111b277c1";
+
+  // save in local storage
   const [inputValues, setInputValues] = useState({
     title_input: JSON.parse(localStorage.getItem("form_values"))?.title_input,
     description_input: JSON.parse(localStorage.getItem("form_values"))
@@ -30,6 +38,10 @@ function UploadBlogContext(props) {
     email_input: JSON.parse(localStorage.getItem("form_values"))?.email_input,
     upload_input: "",
   });
+
+  const [successPopUp, setSuccessPopUp] = useState(false);
+
+  // uploaded image file convert to blob format
 
   function dataURLtoFile(dataurl, filename) {
     var arr = dataurl.split(","),
@@ -43,10 +55,7 @@ function UploadBlogContext(props) {
     return new File([u8arr], filename, { type: mime });
   }
 
-  //Usage example:
-  // var file = dataURLtoFile('data:text/plain;base64,aGVsbG8=','hello.txt');
-  // console.log(dataURLtoFile(inputValues?.upload_input));
-
+  //save uploaded image in local storage
   useEffect(() => {
     localStorage.setItem("form_values", JSON.stringify(inputValues));
     let file = "";
@@ -59,10 +68,6 @@ function UploadBlogContext(props) {
 
       file = dataURLtoFile(fileObject.blob, fileObject?.name);
     }
-    // const tt = dataURLtoFile(
-    //   localStorage.getItem("image"),
-    //   inputValues.upload_input?.name
-    // );
 
     setInputValues((prevValues) => ({
       ...prevValues,
@@ -77,13 +82,15 @@ function UploadBlogContext(props) {
       return catItem ? catItem.id.toString() : null;
     });
   }
-  //
+
   function isEmptyArray(emptyArrVal) {
     return (
       typeof emptyArrVal === "string" ||
       (Array.isArray(emptyArrVal) && emptyArrVal.length === 0)
     );
   }
+
+  // save values on typing
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -117,13 +124,10 @@ function UploadBlogContext(props) {
         };
       });
     }
-    console.log(inputValues);
   };
 
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
-    console.log(file, "fffff");
-
     if (file) {
       setInputValues((prevValues) => ({
         ...prevValues,
@@ -143,6 +147,7 @@ function UploadBlogContext(props) {
     }
   };
 
+  // delete uploadad image
   const clearFile = () => {
     setInputValues((prevValues) => ({
       ...prevValues,
@@ -151,8 +156,8 @@ function UploadBlogContext(props) {
     localStorage.removeItem("image");
   };
 
+  // Clearing the local storage form values
   function handleCleanValues() {
-    // Clearing the local storage form values
     localStorage.removeItem("form_values");
 
     // Resetting the inputValues state to its initial/default state
@@ -166,6 +171,39 @@ function UploadBlogContext(props) {
       upload_input: "",
     });
   }
+
+  // send request on publish button to publish blog
+  const handleCreateRequest = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    // create form data to be submitted and send data correctly
+    const formData = new FormData();
+
+    formData.append("title", inputValues?.title_input);
+    formData.append("description", inputValues?.description_input);
+    formData.append("image", inputValues?.upload_input);
+    formData.append("author", inputValues?.author_input);
+    formData.append("publish_date", inputValues?.date_input);
+    formData.append("categories", inputValues?.category_input);
+    formData.append("email", inputValues?.email_input);
+
+    try {
+      const response = await axios.post(BASE_URL, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (response) {
+        setSuccessPopUp(true);
+      }
+    } catch (err) {
+      setSuccessPopUp(false);
+    }
+  };
+
   return (
     <UploadBlogTheme.Provider
       value={{
@@ -174,6 +212,8 @@ function UploadBlogContext(props) {
         handleInputChange,
         clearFile,
         handleCleanValues,
+        handleCreateRequest,
+        successPopUp,
       }}
     >
       {props.children}

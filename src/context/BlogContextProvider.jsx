@@ -6,7 +6,6 @@ export const BlogThemeContext = createContext();
 function BlogContextProvider(props) {
   const [blogsList, setBlogsList] = useState([]);
   const [urlParams, seturlParams] = useState([]);
-  const [validSymbols, setValidSymbols] = useState(false);
 
   //fetching blogs data from token
 

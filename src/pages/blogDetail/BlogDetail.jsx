@@ -5,6 +5,7 @@ import DataFetcherGet from "../../utilis/DataFetcherGet";
 import styles from "./BlogDetail.module.css";
 
 function BlogDetail() {
+  // fetch each blog by id
   const params = useParams();
   const { blogData } = DataFetcherGet(
     `https://api.blog.redberryinternship.ge/api/blogs/${params.id}`,

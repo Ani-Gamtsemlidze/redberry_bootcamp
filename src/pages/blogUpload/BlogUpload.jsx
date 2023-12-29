@@ -2,7 +2,6 @@ import Header from "../../components/header/Header";
 import styles from "./BlogUpload.module.css";
 import Input from "../../components/form/input/Input";
 import UploadImage from "../../components/form/uploadImage/UploadImage";
-import axios from "axios";
 import calendar from "../../../public/images/calendar.svg";
 import { useEffect, useState } from "react";
 import SuccessPopUp from "../../components/popup/SuccessPopUp";
@@ -13,10 +12,15 @@ import DataFetcherGet from "../../utilis/DataFetcherGet";
 import emailInfo from "../../../public/images/info-circle.svg";
 
 function BlogUpload() {
-  const [successPopUp, setSuccessPopUp] = useState(false);
   const [isAuthorValid, setIsAuthorValid] = useState(false);
 
-  const { inputValues, handleInputChange, handleCleanValues } = useUpload();
+  const {
+    inputValues,
+    handleInputChange,
+    handleCleanValues,
+    handleCreateRequest,
+    successPopUp,
+  } = useUpload();
 
   const Category_URL = "https://api.blog.redberryinternship.ge/api/categories";
   const { blogData } = DataFetcherGet(Category_URL);
@@ -41,53 +45,17 @@ function BlogUpload() {
   const valideAlphabet =
     georgianAlphabetRegex.test(author) && author?.trim() !== "";
 
-  const BASE_URL = "https://api.blog.redberryinternship.ge/api/blogs";
-  const token =
-    "5e4977d25fb8a029227f395a8d29b694059c94c67d1253b1930c154111b277c1";
-
   const validateEmmail =
     email !== "" && !email?.trim().includes("@redberry.ge");
   const title = inputValues.title_input;
 
   const titleValid = title?.trim()?.length < 2;
-  console.log();
   useEffect(() => {
     // Check all conditions for author validation
     const isValidAuthor =
       valideAlphabet && !authorSymbolsValidate && !authorWordsValidate;
     setIsAuthorValid(isValidAuthor);
   }, [author, authorWordsValidate, valideAlphabet, authorSymbolsValidate]);
-
-  const handleCreateRequest = async (e) => {
-    // send request on publish button
-    e.preventDefault();
-    e.stopPropagation();
-
-    const formData = new FormData();
-
-    formData.append("title", inputValues?.title_input);
-    formData.append("description", inputValues?.description_input);
-    formData.append("image", inputValues?.upload_input); // Ensure this is a File object from the input type="file"
-    formData.append("author", inputValues?.author_input);
-    formData.append("publish_date", inputValues?.date_input);
-    formData.append("categories", inputValues?.category_input);
-    formData.append("email", inputValues?.email_input);
-
-    try {
-      const response = await axios.post(BASE_URL, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      if (response) {
-        setSuccessPopUp(true);
-      }
-    } catch (err) {
-      setSuccessPopUp(false);
-    }
-  };
 
   return (
     <>

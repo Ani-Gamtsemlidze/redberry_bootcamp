@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+// fetch data with axios by get methode
 const DataFetcherGet = (url, token) => {
   const [blogData, setBlogData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
