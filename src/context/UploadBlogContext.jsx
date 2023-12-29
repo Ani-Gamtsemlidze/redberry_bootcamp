@@ -123,7 +123,6 @@ function UploadBlogContext(props) {
   const handleFileInputChange = (event) => {
     const file = event.target.files[0];
     console.log(file, "fffff");
-    // localStorage.setItem("imageeeeee", file);
 
     if (file) {
       setInputValues((prevValues) => ({
@@ -151,6 +150,22 @@ function UploadBlogContext(props) {
     }));
     localStorage.removeItem("image");
   };
+
+  function handleCleanValues() {
+    // Clearing the local storage form values
+    localStorage.removeItem("form_values");
+
+    // Resetting the inputValues state to its initial/default state
+    setInputValues({
+      title_input: "",
+      description_input: "",
+      author_input: "",
+      date_input: "",
+      category_input: "",
+      email_input: "",
+      upload_input: "",
+    });
+  }
   return (
     <UploadBlogTheme.Provider
       value={{
@@ -158,6 +173,7 @@ function UploadBlogContext(props) {
         handleFileInputChange,
         handleInputChange,
         clearFile,
+        handleCleanValues,
       }}
     >
       {props.children}

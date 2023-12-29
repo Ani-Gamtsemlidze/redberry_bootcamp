@@ -23,6 +23,7 @@ const DataFetcherGet = (url, token) => {
         console.error("Axios error:", err);
       }
     };
+    window.scrollTo(0, 0);
     fetchData();
   }, [url, token]);
   return { blogData, isLoading, error };

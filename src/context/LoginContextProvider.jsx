@@ -6,9 +6,10 @@ function LoginContextProvider(props) {
   const [userEmail, setUserEmail] = useState("");
   const [active, setActive] = useState(false);
   const [isPopUp, setIsPopUp] = useState(false);
-  // const [error, setError] = useState(false);
+
   const [responseData, setResponseData] = useState();
   const [isEmailExist, setIsEmailExist] = useState(false);
+
   const [emailNotFound, setEmailNotFound] = useState(false);
 
   const BASE_URL = "https://api.blog.redberryinternship.ge/api/login";
@@ -16,7 +17,6 @@ function LoginContextProvider(props) {
   useEffect(() => {
     const storedEmail = localStorage.getItem("mail");
     if (storedEmail) {
-      // setUserEmail(storedEmail);
       setActive(true);
     }
   }, []);
@@ -30,10 +30,8 @@ function LoginContextProvider(props) {
       });
       setResponseData(response);
       if (response) {
-        // console.log("Email exists:", response);
         setIsEmailExist(true);
         setActive(true);
-
         localStorage.setItem("mail", userEmail);
       }
     } catch (err) {

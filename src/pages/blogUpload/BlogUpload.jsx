@@ -10,12 +10,13 @@ import { Link } from "react-router-dom";
 import MultipleSelectChip from "../../components/form/Select/Select";
 import { useUpload } from "../../context/UploadBlogContext";
 import DataFetcherGet from "../../utilis/DataFetcherGet";
+import emailInfo from "../../../public/images/info-circle.svg";
 
 function BlogUpload() {
   const [successPopUp, setSuccessPopUp] = useState(false);
   const [isAuthorValid, setIsAuthorValid] = useState(false);
 
-  const { inputValues, handleInputChange } = useUpload();
+  const { inputValues, handleInputChange, handleCleanValues } = useUpload();
 
   const Category_URL = "https://api.blog.redberryinternship.ge/api/categories";
   const { blogData } = DataFetcherGet(Category_URL);
@@ -91,7 +92,6 @@ function BlogUpload() {
   return (
     <>
       <Header />
-
       <div className={styles.form_page}>
         <div className="common_container">
           <h2 className={styles.page_title}>ბლოგის დამატება</h2>
@@ -119,8 +119,10 @@ function BlogUpload() {
                   autoComplete="off"
                   id="input"
                   type="text"
+                  spellCheck="false"
                   value={
-                    JSON.parse(localStorage.getItem("form_values")).author_input
+                    JSON.parse(localStorage.getItem("form_values"))
+                      ?.author_input
                   }
                   placeholder="შეიყვანეთ ავტორი"
                   onChange={handleInputChange}
@@ -129,10 +131,10 @@ function BlogUpload() {
                   <span
                     style={{
                       color: authorSymbolsValidate
-                        ? "red"
+                        ? "#EA1919"
                         : inputValues.author_input === ""
-                        ? "grey"
-                        : "green",
+                        ? "#85858D"
+                        : "#14D81C",
                     }}
                   >
                     მინიმუმ 4 სიმბოლო{" "}
@@ -140,10 +142,10 @@ function BlogUpload() {
                   <span
                     style={{
                       color: authorWordsValidate
-                        ? "red"
+                        ? "#EA1919"
                         : author === ""
-                        ? "grey"
-                        : "green",
+                        ? "#85858D"
+                        : "#14D81C",
                     }}
                   >
                     მინიმუმ ორი სიტყვა{" "}
@@ -151,10 +153,10 @@ function BlogUpload() {
                   <span
                     style={{
                       color: valideAlphabet
-                        ? "green"
+                        ? "#14D81C"
                         : author === ""
-                        ? "grey"
-                        : "red",
+                        ? "#85858D"
+                        : "#EA1919",
                     }}
                   >
                     {" "}
@@ -174,11 +176,12 @@ function BlogUpload() {
                   label="სათაური"
                   name="title_input"
                   value={
-                    JSON.parse(localStorage.getItem("form_values")).title_input
+                    JSON.parse(localStorage.getItem("form_values"))?.title_input
                   }
                   autoComplete="off"
                   id="title"
                   type="text"
+                  spellCheck="false"
                   placeholder="შეიყვანეთ სათაური"
                   onChange={handleInputChange}
                 />
@@ -186,10 +189,10 @@ function BlogUpload() {
                   style={{
                     color:
                       titleValid && title?.trim() !== ""
-                        ? "red"
+                        ? "#EA1919"
                         : title === ""
-                        ? "grey"
-                        : "green",
+                        ? "#85858D"
+                        : "#14D81C",
                   }}
                   // className={styles.info}
                 >
@@ -208,6 +211,7 @@ function BlogUpload() {
                     ? styles.default_border
                     : styles.success_border)
                 }
+                spellCheck="false"
                 label="აღწერა"
                 name="description_input"
                 autoComplete="off"
@@ -215,12 +219,23 @@ function BlogUpload() {
                 textarea
                 value={
                   JSON.parse(localStorage.getItem("form_values"))
-                    .description_input
+                    ?.description_input
                 }
                 placeholder="შეიყვანეთ აღწერა"
                 onChange={handleInputChange}
               />
-              <span>მინიმუმ 2 სიმბოლო</span>
+              <span
+                style={{
+                  color:
+                    description?.length < 2 && description?.trim() !== ""
+                      ? "#EA1919"
+                      : description === ""
+                      ? "#85858D"
+                      : "#14D81C",
+                }}
+              >
+                მინიმუმ 2 სიმბოლო
+              </span>
             </div>
             <div className={styles.date_category}>
               <div className={styles.date}>
@@ -230,9 +245,10 @@ function BlogUpload() {
                   label="გამოქვეყნების თარიღი"
                   autoComplete="off"
                   id="publish"
+                  spellCheck="false"
                   type="date"
                   value={
-                    JSON.parse(localStorage.getItem("form_values")).date_input
+                    JSON.parse(localStorage.getItem("form_values"))?.date_input
                   }
                   name="date_input"
                   onChange={handleInputChange}
@@ -257,26 +273,39 @@ function BlogUpload() {
                 name="email_input"
                 id="email"
                 type="text"
+                spellCheck="false"
                 value={
-                  JSON.parse(localStorage.getItem("form_values")).email_input
+                  JSON.parse(localStorage.getItem("form_values"))?.email_input
                 }
                 placeholder="Example@redberry.ge"
                 autoComplete="off"
                 onChange={handleInputChange}
               />
               {validateEmmail && (
-                <p style={{ color: "#EA1919", fontSize: "12px" }}>
-                  მეილი უნდა მთავრდებოდეს @redberry.ge- ით
-                </p>
+                <div className={styles.email_info}>
+                  <img src={emailInfo} alt="not valid email" />
+                  <div className={styles.error_info}>
+                    <p>მეილი უნდა მთავრდებოდეს @redberry.ge- ით</p>
+                  </div>
+                </div>
               )}
             </div>
+
             {successPopUp && (
-              <SuccessPopUp>
-                <p>ჩანაწერი წარმატებით დაემატა</p>
-                <Link to="/" className={styles.btn}>
-                  მთავარ გვერდზე დაბრუნება
-                </Link>
-              </SuccessPopUp>
+              <div className={styles.popup_container}>
+                <div className={styles.popup_box}>
+                  <SuccessPopUp>
+                    <p>ჩანაწერი წარმატებით დაემატა</p>
+                    <Link
+                      to="/"
+                      onClick={handleCleanValues}
+                      className={styles.btn}
+                    >
+                      მთავარ გვერდზე დაბრუნება
+                    </Link>
+                  </SuccessPopUp>
+                </div>
+              </div>
             )}
             <div className={styles.publish_button}>
               <button type="submit">გამოქვეყნება</button>

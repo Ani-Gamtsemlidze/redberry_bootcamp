@@ -52,6 +52,7 @@ input[type="file" i] {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 8px;
 }
 
 .gallery_name {
@@ -60,6 +61,13 @@ input[type="file" i] {
 }
 .uploaded img {
   margin: 16px 12px 16px 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.uploaded img:hover {
+  background-color: #d9d8e0;
+  border-radius: 50%;
 }
 .uploaded p {
   font-size: 14px;

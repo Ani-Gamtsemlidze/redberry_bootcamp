@@ -10,6 +10,7 @@ import Chip from "@mui/material/Chip";
 import { useUpload } from "../../../context/UploadBlogContext";
 
 // import CloseIcon from "@mui/icons-material/Close";
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -98,9 +99,9 @@ export default function MultipleSelectChip({ selectArray, label }) {
                     clickable
                     style={{ backgroundColor: bgArray()[index], color: "#fff" }}
                     // deleteIcon={
-                    //   <CloseIcon
-                    //     onMouseDown={(event) => event.stopPropagation()}
-                    //   />
+                    //   // <CloseIcon
+                    //   //   onMouseDown={(event) => event.stopPropagation()}
+                    //   // />
                     // }
                     onDelete={(e) => handleDelete(e, value)}
                   />
