@@ -4,7 +4,8 @@
 
 .form_page {
   background-color: #fcfcfd;
-  padding: 33px 0 65px 0;
+  padding: 33px 0 100px 200px;
+  position: relative;
 }
 .textarea {
   width: 600px;
@@ -209,4 +210,17 @@ input[type="date"]::-webkit-clear-button {
 }
 .error_info {
   width: 260px;
+}
+.back {
+  position: absolute;
+  cursor: pointer;
+  z-index: 1;
+  top: 30px;
+  left: 78px;
+}
+
+.back img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
 }

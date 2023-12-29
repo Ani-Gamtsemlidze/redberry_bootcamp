@@ -9,7 +9,7 @@ import Select from "@mui/material/Select";
 import Chip from "@mui/material/Chip";
 import { useUpload } from "../../../context/UploadBlogContext";
 
-// import CloseIcon from "@mui/icons-material/Close";
+import CloseIcon from "@mui/icons-material/Close";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -40,17 +40,12 @@ let catArray = [
 export default function MultipleSelectChip({ selectArray, label }) {
   const { handleInputChange } = useUpload();
   const [listName, setListName] = React.useState([]);
-  // console.log(listName);
   const handleChange = (e) => {
     handleInputChange(e);
     const {
       target: { value },
     } = e;
-    console.log(value);
-    setListName(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    setListName(typeof value === "string" ? value.split(",") : value);
   };
 
   const handleDelete = (e, value) => {
@@ -83,7 +78,7 @@ export default function MultipleSelectChip({ selectArray, label }) {
         <Select
           className="upload_select"
           labelId="demo-multiple-chip-label"
-          id="demo-multiple-chip"
+          id="demo-multiple-chip-label"
           multiple
           value={listName}
           onChange={handleChange}
@@ -98,11 +93,11 @@ export default function MultipleSelectChip({ selectArray, label }) {
                     label={value}
                     clickable
                     style={{ backgroundColor: bgArray()[index], color: "#fff" }}
-                    // deleteIcon={
-                    //   // <CloseIcon
-                    //   //   onMouseDown={(event) => event.stopPropagation()}
-                    //   // />
-                    // }
+                    deleteIcon={
+                      <CloseIcon
+                        onMouseDown={(event) => event.stopPropagation()}
+                      />
+                    }
                     onDelete={(e) => handleDelete(e, value)}
                   />
                 </>

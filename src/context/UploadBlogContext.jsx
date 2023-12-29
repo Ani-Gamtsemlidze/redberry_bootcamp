@@ -61,10 +61,6 @@ function UploadBlogContext(props) {
     let file = "";
     if (localStorage.getItem("image")) {
       const fileObject = JSON.parse(localStorage.getItem("image"));
-      console.log(
-        fileObject?.name,
-        " inputValues.upload_input?.name inputValues.upload_input?.name"
-      );
 
       file = dataURLtoFile(fileObject.blob, fileObject?.name);
     }
@@ -158,9 +154,10 @@ function UploadBlogContext(props) {
 
   // Clearing the local storage form values
   function handleCleanValues() {
+    setSuccessPopUp(false);
     localStorage.removeItem("form_values");
+    localStorage.removeItem("image ");
 
-    // Resetting the inputValues state to its initial/default state
     setInputValues({
       title_input: "",
       description_input: "",
