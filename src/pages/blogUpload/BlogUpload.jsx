@@ -180,7 +180,7 @@ function BlogUpload() {
           <div className={styles.description}>
             <Input
               className={
-                description_textarea +
+                `description_textarea ` +
                 (description?.length < 2 && description?.trim() !== ""
                   ? styles.error_border
                   : description === ""
