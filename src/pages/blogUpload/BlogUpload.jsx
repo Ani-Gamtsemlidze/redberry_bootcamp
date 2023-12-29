@@ -34,7 +34,6 @@ function BlogUpload() {
   // check symbols length in author input
   const hasSymbolsErr =
     author?.trim().replace(/\s+/g, "")?.length < 4 && author?.trim() !== "";
-
   // check words length in author input
 
   const hasWordsErr =
@@ -46,8 +45,7 @@ function BlogUpload() {
   const hasAlphabetError =
     !georgianAlphabetRegex.test(author) && author?.trim() !== "";
 
-  const validateEmmail =
-    email !== "" && !email?.trim().includes("@redberry.ge");
+  const emailHasErr = email !== "" && !email?.trim().includes("@redberry.ge");
   const title = inputValues.title_input;
 
   const titleValid = title?.trim()?.length < 2;
@@ -79,7 +77,7 @@ function BlogUpload() {
             <div className={styles.author}>
               <Input
                 className={
-                  author === ""
+                  !author
                     ? styles.default_border
                     : !authErr
                     ? styles.success_border
@@ -100,10 +98,10 @@ function BlogUpload() {
               <div className={styles.info}>
                 <span
                   style={{
-                    color: hasSymbolsErr
-                      ? "#EA1919"
-                      : inputValues.author_input === ""
+                    color: !inputValues.author_input
                       ? "#85858D"
+                      : hasSymbolsErr
+                      ? "#EA1919"
                       : "#14D81C",
                   }}
                 >
@@ -111,10 +109,10 @@ function BlogUpload() {
                 </span>
                 <span
                   style={{
-                    color: hasWordsErr
-                      ? "#EA1919"
-                      : author === ""
+                    color: !author
                       ? "#85858D"
+                      : hasWordsErr
+                      ? "#EA1919"
                       : "#14D81C",
                   }}
                 >
@@ -122,12 +120,11 @@ function BlogUpload() {
                 </span>
                 <span
                   style={{
-                    color:
-                      author === ""
-                        ? "#85858D"
-                        : !hasAlphabetError
-                        ? "#14D81C"
-                        : "#EA1919",
+                    color: !author
+                      ? "#85858D"
+                      : !hasAlphabetError
+                      ? "#14D81C"
+                      : "#EA1919",
                   }}
                 >
                   {" "}
@@ -161,7 +158,7 @@ function BlogUpload() {
                   color:
                     titleValid && title?.trim() !== ""
                       ? "#EA1919"
-                      : title === ""
+                      : !title
                       ? "#85858D"
                       : "#14D81C",
                 }}
@@ -176,10 +173,10 @@ function BlogUpload() {
             <Input
               className={
                 `description_textarea ` +
-                (description?.length < 2 && description?.trim() !== ""
-                  ? styles.error_border
-                  : description === ""
+                (!description
                   ? styles.default_border
+                  : description?.length < 2 && description?.trim() !== ""
+                  ? styles.error_border
                   : styles.success_border)
               }
               spellCheck="false"
@@ -200,7 +197,7 @@ function BlogUpload() {
                 color:
                   description?.length < 2 && description?.trim() !== ""
                     ? "#EA1919"
-                    : description === ""
+                    : !description
                     ? "#85858D"
                     : "#14D81C",
               }}
@@ -231,11 +228,11 @@ function BlogUpload() {
           <div>
             <Input
               className={
-                validateEmmail
+                !inputValues.email_input
+                  ? styles.default_border
+                  : emailHasErr
                   ? styles.error_border
-                  : inputValues.email_input
-                  ? styles.success_border
-                  : ""
+                  : styles.success_border
               }
               label="ელ-ფოსტა"
               name="email_input"
@@ -249,14 +246,16 @@ function BlogUpload() {
               autoComplete="off"
               onChange={handleInputChange}
             />
-            {validateEmmail && (
-              <div className={styles.email_info}>
-                <img src={emailInfo} alt="not valid email" />
-                <div className={styles.error_info}>
-                  <p>მეილი უნდა მთავრდებოდეს @redberry.ge- ით</p>
-                </div>
-              </div>
-            )}
+            {!inputValues.email_input
+              ? null
+              : emailHasErr && (
+                  <div className={styles.email_info}>
+                    <img src={emailInfo} alt="not valid email" />
+                    <div className={styles.error_info}>
+                      <p>მეილი უნდა მთავრდებოდეს @redberry.ge- ით</p>
+                    </div>
+                  </div>
+                )}
           </div>
 
           {successPopUp && (
