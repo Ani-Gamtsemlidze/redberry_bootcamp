@@ -9,7 +9,6 @@ import SuccessPopUp from "../../components/popup/SuccessPopUp";
 import { Link } from "react-router-dom";
 import MultipleSelectChip from "../../components/form/Select/Select";
 import { useUpload } from "../../context/UploadBlogContext";
-import { useBlogs } from "../../context/BlogContextProvider";
 import DataFetcherGet from "../../utilis/DataFetcherGet";
 
 function BlogUpload() {
@@ -23,31 +22,34 @@ function BlogUpload() {
 
   const email = inputValues.email_input;
   const author = inputValues.author_input;
+  const description = inputValues.description_input;
+  const date = inputValues.date_input;
 
   // check symbols length in author input
   const authorSymbolsValidate =
-    author.trim().replace(/\s+/g, "").length < 4 && author.trim() !== "";
+    author?.trim().replace(/\s+/g, "")?.length < 4 && author?.trim() !== "";
 
   // check words length in author input
 
   const authorWordsValidate =
-    author.trim().split(" ").length < 2 && author.trim() !== "";
+    author?.trim().split(" ")?.length < 2 && author?.trim() !== "";
 
   // check georgian alphabet in author input
 
   const georgianAlphabetRegex = /^[\u10D0-\u10FF\s]+$/;
   const valideAlphabet =
-    georgianAlphabetRegex.test(author) && author.trim() !== "";
+    georgianAlphabetRegex.test(author) && author?.trim() !== "";
 
   const BASE_URL = "https://api.blog.redberryinternship.ge/api/blogs";
   const token =
     "5e4977d25fb8a029227f395a8d29b694059c94c67d1253b1930c154111b277c1";
 
-  const validateEmmail = email !== "" && !email.trim().includes("@redberry.ge");
+  const validateEmmail =
+    email !== "" && !email?.trim().includes("@redberry.ge");
   const title = inputValues.title_input;
 
-  const titleValid = title.trim().length < 2;
-
+  const titleValid = title?.trim()?.length < 2;
+  console.log();
   useEffect(() => {
     // Check all conditions for author validation
     const isValidAuthor =
@@ -62,13 +64,13 @@ function BlogUpload() {
 
     const formData = new FormData();
 
-    formData.append("title", inputValues.title_input);
-    formData.append("description", inputValues.description_input);
-    formData.append("image", inputValues.upload_input); // Ensure this is a File object from the input type="file"
-    formData.append("author", inputValues.author_input);
-    formData.append("publish_date", inputValues.date_input);
-    formData.append("categories", inputValues.category_input);
-    formData.append("email", inputValues.email_input);
+    formData.append("title", inputValues?.title_input);
+    formData.append("description", inputValues?.description_input);
+    formData.append("image", inputValues?.upload_input); // Ensure this is a File object from the input type="file"
+    formData.append("author", inputValues?.author_input);
+    formData.append("publish_date", inputValues?.date_input);
+    formData.append("categories", inputValues?.category_input);
+    formData.append("email", inputValues?.email_input);
 
     try {
       const response = await axios.post(BASE_URL, formData, {
@@ -117,6 +119,9 @@ function BlogUpload() {
                   autoComplete="off"
                   id="input"
                   type="text"
+                  value={
+                    JSON.parse(localStorage.getItem("form_values")).author_input
+                  }
                   placeholder="შეიყვანეთ ავტორი"
                   onChange={handleInputChange}
                 />
@@ -160,7 +165,7 @@ function BlogUpload() {
               <div className={styles.title}>
                 <Input
                   className={
-                    titleValid && title.trim() !== ""
+                    titleValid && title?.trim() !== ""
                       ? styles.error_border
                       : title
                       ? styles.success_border
@@ -168,6 +173,9 @@ function BlogUpload() {
                   }
                   label="სათაური"
                   name="title_input"
+                  value={
+                    JSON.parse(localStorage.getItem("form_values")).title_input
+                  }
                   autoComplete="off"
                   id="title"
                   type="text"
@@ -177,7 +185,7 @@ function BlogUpload() {
                 <span
                   style={{
                     color:
-                      titleValid && title.trim() !== ""
+                      titleValid && title?.trim() !== ""
                         ? "red"
                         : title === ""
                         ? "grey"
@@ -193,10 +201,11 @@ function BlogUpload() {
             <div className={styles.description}>
               <Input
                 className={
-                  `test ` +
-                  (inputValues.description_input.length < 2 &&
-                  inputValues.description_input.trim() !== ""
+                  `description_textarea ` +
+                  (description?.length < 2 && description?.trim() !== ""
                     ? styles.error_border
+                    : description === ""
+                    ? styles.default_border
                     : styles.success_border)
                 }
                 label="აღწერა"
@@ -204,6 +213,10 @@ function BlogUpload() {
                 autoComplete="off"
                 id="description"
                 textarea
+                value={
+                  JSON.parse(localStorage.getItem("form_values"))
+                    .description_input
+                }
                 placeholder="შეიყვანეთ აღწერა"
                 onChange={handleInputChange}
               />
@@ -213,26 +226,23 @@ function BlogUpload() {
               <div className={styles.date}>
                 <img className={styles.calendar} src={calendar} />
                 <Input
+                  className={date && styles.success_border}
                   label="გამოქვეყნების თარიღი"
                   autoComplete="off"
                   id="publish"
                   type="date"
+                  value={
+                    JSON.parse(localStorage.getItem("form_values")).date_input
+                  }
                   name="date_input"
                   onChange={handleInputChange}
                 />
               </div>
 
-              {/* <Input
-                label="კატეგორიები"
-                name="category_input"
-                id="category"
-                type="text"
-                placeholder="Example@redberry.ge"
-                autoComplete="off"
-                onChange={handleInputChange}
-              /> */}
-
-              <MultipleSelectChip selectArray={blogData} />
+              <MultipleSelectChip
+                label={"კატეგორიები"}
+                selectArray={blogData}
+              />
             </div>
             <div>
               <Input
@@ -247,6 +257,9 @@ function BlogUpload() {
                 name="email_input"
                 id="email"
                 type="text"
+                value={
+                  JSON.parse(localStorage.getItem("form_values")).email_input
+                }
                 placeholder="Example@redberry.ge"
                 autoComplete="off"
                 onChange={handleInputChange}

@@ -6,18 +6,18 @@ import { useState } from "react";
 import { useUpload } from "../../../context/UploadBlogContext";
 
 function UploadImage() {
-  const { handleFileInputChange, inputValues } = useUpload();
-  const [imgToggler, setImgToggler] = useState(false);
+  const { handleFileInputChange, inputValues, clearFile } = useUpload();
+  // const [imgToggler, setImgToggler] = useState(false);
   function handleUploadImage(e) {
     handleFileInputChange(e);
-    setImgToggler(true);
+    // setImgToggler(true);
   }
 
   return (
     <>
       <div className={styles.inputGroup}>
         <label htmlFor="file">ატვირთეთ ფოტო</label>
-        {!imgToggler ? (
+        {!inputValues.upload_input.name ? (
           <div className={styles.file}>
             <label className={styles.img_file} htmlFor="file">
               <img src={uploadPhoto} alt="Upload icon" />
@@ -41,7 +41,7 @@ function UploadImage() {
               <p>{inputValues.upload_input.name}</p>
             </div>
             <div>
-              <img onClick={() => setImgToggler(false)} src={close} />
+              <img onClick={() => clearFile()} src={close} />
             </div>
           </div>
         )}

@@ -93,7 +93,7 @@
   background-color: #fcfcfd;
 }
 
-.test {
+.description_textarea {
   width: 600px;
   height: 124px;
   border-radius: 12px;
@@ -110,6 +110,7 @@
   height: 44px;
   border-radius: 12px !important;
   padding-right: 35px;
+  border: 1px #e4e3eb solid;
 }
 #demo-multiple-chip-label,
 .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
@@ -175,6 +176,10 @@
   .MuiOutlinedInput-notchedOutline {
   border-width: 1px !important;
   height: 44px !important;
+  border: none !important;
+}
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+  border: none !important;
 }
 
 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
@@ -187,5 +192,18 @@
 }
 
 .css-yi3mkw {
-  margin-bottom: 5px !important;
+  margin-bottom: 1px !important;
+}
+
+.css-185x04f-MuiButtonBase-root-MuiChip-root .MuiChip-deleteIcon {
+  font-size: 19px !important;
+  color: #fff !important;
+}
+
+.css-1nrlq1o-MuiFormControl-root {
+  margin-top: 9px !important;
+}
+
+textarea {
+  resize: none;
 }

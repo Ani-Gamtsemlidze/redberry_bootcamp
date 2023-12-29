@@ -89,6 +89,10 @@ input[type="date"] {
   background-color: #fcfcfd;
   transition: 0.4s;
 }
+input[type="text" i]:focus,
+input[type="date"]:focus {
+  border: 1.5px #5d37f3 solid;
+}
 
 input[type="text" i],
 input[type="date" i]::placeholder {
